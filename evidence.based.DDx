@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<meta copyright="Copyright Tom Hsiung, M.S. Pharm, 2019" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
+  <head>
+      <style type="text/css">
+        input[type="text"] {
+          background-color: #f2f2f2;
+          border-radius: 5px;
+          text-align: center;
+        }
+        input[type="text"]:hover {
+          background-color: #ffffff;
+        }
+        input[type="button"] {
+          background-color: #f2f2f2;
+          border-radius: 5px;
+        }
+        input[type="button"]:hover {
+          background-color:#5599eb;
+          border-radius: 5px;
+          color: #ffffff;
+        }
+        body {
+          width: 1600px;
+          font-family: monospace;
+          background-image: url("Greater_coat_of_arms_of_the_United_States.png"), url("1st_Marine_Division_insignia.png"), url("Seal_of_the_United_States_Department_of_the_Navy.png"), url("United_States_Department_of_Defense_Seal.png"), url("Seal_of_the_United_States_Marine_Corps.png");
+          background-repeat: no-repeat;
+          background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 95% 10%;
+          background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
+          background-attachment: fixed, fixed, fixed, fixed, fixed;
+        }
+        p {
+          line-height: 1.5em;
+        }
+        ul {
+          line-height: 1.5em;
+        }
+        ol {
+          line-height: 1.5em;
+        }
+        fieldset.one {
+          border: 2px solid #5599eb;
+          padding: 5px;
+          text-align: left;
+          border-radius: 5px;
+        }
+        fieldset.two {
+          border: 2px solid #ed6c60;
+          padding: 5px;
+          text-align: left;
+          border-radius: 5px;
+        }
+        legend {
+          margin-left: 15px;
+        }
+        #postProbabilityShadow {
+          border: 2px solid #5599eb;
+          padding: 2px;
+          border-radius: 5px;
+        }
+        #LRShadow {
+          border: 2px solid #5599eb;
+          padding: 2px;
+        border-radius: 5px;
+      }
+      #postProbabilityShadow2 {
+        border: 2px solid #ed6c60;
+        padding: 2px;
+        border-radius: 5px;
+      }
+      #LRShadow2 {
+        border: 2px solid #ed6c60;
+        padding: 2px;
+        border-radius: 5px;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <title>Bayesian Probability Estimator</title>
+  </head>
+  <body>
+  <div style="width:100%;">
+    <div style="float:left; width:50%;">
+    <h3>Bayesian Probability Estimator</h3>
+
+	  <p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
+
+			 24 Tongjia Alley, China Pharmaceutical University<br />
+
+		   Nanjing, Jiangsu, 210009</b></p>
+
+		<hr />
+
+		<h3>Bayesian probability estimator for diagnosis / condition</h3>
+
+		<table>
+
+	    <tr>
+        <td align="right">Pre-probability:</td>
+
+				<td align="right" width="160" height="50">
+
+            <abbr title="Fill in a value between 0 and 1">
+            <form align="left" id="preP">
+
+				          <input size="10" type="text" name="prePInput" />
+
+				    </form></abbr></td>
+        <td align="right">Pre-odds:</td>
+        <td aligh="right" width="160" height="50" id="preOdd">0</td>
+      </tr>
+      <tr>
+	      <td align="right">Sensitivity:</td>
+
+				<td align="right" width="160" height="50">
+
+            <abbr title="Fill in a value between 0 and 1">
+            <form align="left" id="sens">
+
+				          <input size="10" type="text" name="sensInput" />
+
+				    </form></abbr></td>
+
+				<td align="right">Specificity:</td>
+
+				<td align="right" width="160" height="50">
+
+            <abbr title="Fill in a value between 0 and 1">
+            <form align="left" id="spec">
+
+				          <input size="10" type="text" name="specInput" />
+
+				    </form></abbr></td>
+      </tr>
+      </table>
+      <table>
+        <td align="right">Type of LR:</td>
+
+				<td align="right" width="480" height="50">
+
+				    <form align="left" id="typeLR" onclick="setValue();">
+
+				          <input type="radio" name="typeLRInput" value="positive" checked="checked" />positive LR
+                  <input type="radio" name="typeLRInput" value="negative" />negative LR
+
+            </form></td>
+		  </table>
+      <table>
+        <td aligh="right">Likelihood Ratio:</td>
+        <td aligh="left" width="150" id="likelihoodRatio">0</td>
+      </table>
+      <br />
+
+		  <br />
+
+		  <fieldset class="one" style="width:640px"><legend>Results:</legend>
+
+		  <table>
+          <td align="right">Post-probability:</td>
+
+				  <td align="left" width="150" id="postP">0</td>
+          <td width="60"></td>
+          <td align="right" width="">Post-odds:</td>
+
+				  <td align="left" width="150" id="postOdd">0</td>
+
+			</table>
+
+		</fieldset>
+    <br />
+    <form>
+      <input type="button" value="Calculate" onclick="Calculate();" />
+
+			<input type="button" value="Reset" onclick="Reset();" />
+
+		</form>
+
+
+		<h3>Notice:</h3>
+
+			<ul>
+
+			  <li>Pre-probability is the probability of the diagnosis / condition before tests</li>
+
+			  <li><div style="display:inline" id="postProbabilityShadow"><b>Post-probability</b></div> is the probability of the diagnosis / condition after tests</li>
+
+			  <li>Sensivity is the sensivity of the test</li>
+
+				<li>Specificity is the specificity of the test</li>
+
+        <li><div style="display:inline" id="LRShadow"><b>LR</b></div> means likelihood ratio, that is, the probability of finding in patients with<br /> diease divided by the probability of same finding in patients without disease</li>
+      </ul>
+
+      <hr />
+			<h3>References:</h3>
+
+			<ol>
+
+				<li>McGee, S. (Ed.). (2012). <i>Evidence-based physical diagnosis 3rd edition</i> (pp. 12-18). Readfield, ME: Saunders.</li>
+
+			</ol>
+
+
+    </div>
+    <div style="float:left; width:50%;">
+	  <h3>&nbsp</h3>
+
+		<p><b>
+
+			 <br />
+
+			 <br />&nbsp
+
+		   </b></p>
+
+		<hr />
+
+		<h3>Continued Bayesian probability estimator for diagnosis / condition</h3>
+
+		<table>
+
+	    <tr>
+        <td align="right">Pre-probability:</td>
+
+				<td align="right" width="160" height="50">
+
+            <abbr title="Fill in a value between 0 and 1">
+				    <form align="left" id="preP2">
+
+				          <input size="10" type="text" name="prePInput2" />
+
+				    </form></abbr></td>
+        <td align="right">Pre-odds:</td>
+        <td aligh="right" width="160" height="50" id="preOdd2">0</td>
+      </tr>
+      <tr>
+	      <td align="right">Sensitivity:</td>
+
+				<td align="right" width="160" height="50">
+
+            <abbr title="Fill in a value between 0 and 1">
+				    <form align="left" id="sens2">
+
+				          <input size="10" type="text" name="sensInput2" />
+
+				    </form></abbr></td>
+
+				<td align="right">Specificity:</td>
+
+				<td align="right" width="160" height="50">
+
+            <abbr title="Fill in a value between 0 and 1">
+				    <form align="left" id="spec2">
+
+				          <input size="10" type="text" name="specInput2" />
+
+				    </form></abbr></td>
+      </tr>
+      </table>
+      <table>
+        <td align="right">Type of LR:</td>
+
+				<td align="right" width="480" height="50">
+
+				    <form align="left" id="typeLR2" onclick="setValue2();">
+
+				          <input type="radio" name="typeLRInput2" value="positive" checked="checked" />positive LR
+                  <input type="radio" name="typeLRInput2" value="negative" />negative LR
+
+            </form></td>
+		  </table>
+      <table>
+        <td aligh="right">Likelihood Ratio:</td>
+        <td aligh="left" width="150" id="likelihoodRatio2">0</td>
+      </table>
+      <br />
+
+		  <br />
+
+		  <fieldset class="two" style="width:640px"><legend>Results:</legend>
+
+		  <table>
+          <td align="right">Post-probability:</td>
+
+				  <td align="left" width="150" id="postP2">0</td>
+          <td width="60"></td>
+          <td align="right" width="">Post-odds:</td>
+
+				  <td align="left" width="150" id="postOdd2">0</td>
+
+			</table>
+
+		</fieldset>
+    <br />
+    <form>
+      <input type="button" value="Calculate" onclick="Calculate2();" />
+
+			<input type="button" value="Reset" onclick="Reset2();" />
+
+		</form>
+
+
+		<h3>Notice:</h3>
+
+			<ul>
+
+			  <li>Pre-probability is the probability of the diagnosis / condition before tests</li>
+
+			  <li><div style="display:inline" id="postProbabilityShadow2"><b>Post-probability</b></div> is the probability of the diagnosis / condition after tests</li>
+
+			  <li>Sensivity is the sensivity of the test</li>
+
+				<li>Specificity is the specificity of the test</li>
+
+        <li><div style="display:inline" id="LRShadow2"><b>LR</b></div> means likelihood ratio, that is, the probability of finding in patients with</br /> diease divided by the probability of same finding in patients without disease</li>
+      </ul>
+
+      <hr />
+    </div>
+    <h3>Contact:</h3>
+    <p>For more information please visit <a href="http://blog.tomhsiung.com">blog.toms-therapeutics.site</a></p>
+  </div>
+    <script>
+    var preP;
+    var preOdd;
+    var sens;
+    var spec;
+    var typeLR = "positive";
+    var likelihoodRatio = 0;
+    var postOdd;
+    var postP;
+    function setValue() {
+      typeLR = document.forms.typeLR.typeLRInput.value;
+    }
+    function Calculate() {
+      preP = Number(document.forms.preP.prePInput.value);
+      preOdd = preP/(1-preP)
+      sens = Number(document.forms.sens.sensInput.value);
+      spec = Number(document.forms.spec.specInput.value);
+      if(typeLR == "positive") {
+        likelihoodRatio = sens/(1-spec);
+      }
+      else if(typeLR == "negative") {
+        likelihoodRatio = (1-sens)/spec;
+      }
+      postOdd = preOdd*likelihoodRatio;
+      postP = postOdd/(1+postOdd);
+      document.all("preOdd").innerHTML = preOdd;
+      document.all("likelihoodRatio").innerHTML = likelihoodRatio;
+      document.all("postOdd").innerHTML = postOdd;
+      document.all("postP").innerHTML = postP;
+    }
+    function Reset() {
+      document.getElementById("preP").reset();
+      preOdd = 0;
+      document.getElementById("sens").reset();
+      document.getElementById("spec").reset();
+      document.getElementById("typeLR").reset();
+      likelihoodRatio = 0;
+      postP = 0;
+      postOdd = 0;
+      document.all("likelihoodRatio").innerHTML = likelihoodRatio;
+      document.all("preOdd").innerHTML = preOdd;
+      document.all("postP").innerHTML = postP;
+      document.all("postOdd").innerHTML = postOdd;
+    }
+    var preP2;
+    var preOdd2;
+    var sens2;
+    var spec2;
+    var typeLR2 = "positive";
+    var likelihoodRatio2 = 0;
+    var postOdd2;
+    var postP2;
+    function setValue2() {
+      typeLR2 = document.forms.typeLR2.typeLRInput2.value;
+    }
+    function Calculate2() {
+      preP2 = Number(document.forms.preP2.prePInput2.value);
+      preOdd2 = preP2/(1-preP2)
+      sens2 = Number(document.forms.sens2.sensInput2.value);
+      spec2 = Number(document.forms.spec2.specInput2.value);
+      if(typeLR2 == "positive") {
+        likelihoodRatio2 = sens2/(1-spec2);
+      }
+      else if(typeLR2 == "negative") {
+        likelihoodRatio2 = (1-sens2)/spec2;
+      }
+      postOdd2 = preOdd2*likelihoodRatio2;
+      postP2 = postOdd2/(1+postOdd2);
+      document.all("preOdd2").innerHTML = preOdd2;
+      document.all("likelihoodRatio2").innerHTML = likelihoodRatio2;
+      document.all("postOdd2").innerHTML = postOdd2;
+      document.all("postP2").innerHTML = postP2;
+    }
+    function Reset2() {
+      document.getElementById("preP2").reset();
+      preOdd2 = 0;
+      document.getElementById("sens2").reset();
+      document.getElementById("spec2").reset();
+      document.getElementById("typeLR2").reset();
+      likelihoodRatio2 = 0;
+      postP2 = 0;
+      postOdd2 = 0;
+      document.all("likelihoodRatio2").innerHTML = likelihoodRatio2;
+      document.all("preOdd2").innerHTML = preOdd2;
+      document.all("postP2").innerHTML = postP2;
+      document.all("postOdd2").innerHTML = postOdd2;
+    }
+    </script>
+  </body>
+</html>
