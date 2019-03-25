@@ -294,10 +294,10 @@
         spec2 = Number(document.forms.spec2.specInput2.value);
         if(typeLR2 == "positive") {
             likelihoodRatio2 = sens2/(1-spec2);
-      }
-      else if(typeLR2 == "negative") {
-          likelihoodRatio2 = (1-sens2)/spec2;
-      }
+        }
+        else if(typeLR2 == "negative") {
+            likelihoodRatio2 = (1-sens2)/spec2;
+        }
         postOdd2 = preOdd2*likelihoodRatio2;
         postP2 = postOdd2/(1+postOdd2);
         document.all("preOdd2").innerHTML = preOdd2;
