@@ -1,1034 +1,515 @@
 <!DOCTYPE html>
-
 <html>
-
 <meta copyright="Copyright Tom 'Prophet' Hsiung, M.S. Pharm, 2018" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
-
 	<head>
-
 		<style type="text/css">
-
 			input[type="text"] {
-
 				background-color: #f2f2f2;
-
 				border-radius: 5px;
-
 				text-align: center;
-
 			}
-
 			input[type="text"]:hover {
-
 				background-color: #ffffff;
-
 			}
-
 			input[type="button"] {
-
         background-color: #f2f2f2;
-
 				border-radius: 5px;
-
 			}
-
 			input[type="button"]:hover {
-
 				background-color:#5599eb;
-
 				border-radius: 5px;
-
 				color: #ffffff;
-
 			}
-
 			body {
-
         width: 1600px;
-
 				font-family: monospace;
-
 				background-image: url("Greater_coat_of_arms_of_the_United_States.png"), url("1st_Marine_Division_insignia.png"), url("Seal_of_the_United_States_Department_of_the_Navy.png"), url("United_States_Department_of_Defense_Seal.png"), url("Seal_of_the_United_States_Marine_Corps.png");
-
 				background-repeat: no-repeat;
-
 				background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 95% 10%;
-
 				background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
-
 				background-attachment: fixed, fixed, fixed, fixed, fixed;
-
       }
-
 			p {
-
 				line-height: 1.5em;
-
 			}
-
 			ul {
-
 				line-height: 1.5em;
-
 			}
-
 			ol {
-
 				line-height: 1.5em;
-
 			}
-
 			fieldset.one {
-
 				border: 2px solid #5599eb;
-
 				padding: 5px;
-
 				text-align: left;
-
 				border-radius: 5px;
-
 			}
-
 			fieldset.two {
-
 				border: 2px solid #ed6c60;
-
 				padding: 5px;
-
 				text-align: left;
-
 				border-radius: 5px;
-
 			}
-
 			legend {
-
 				margin-left: 15px;
-
 			}
-
       #intraclassCorrelationShadow {
-
 				border: 2px solid #5599eb;
-
 				padding: 2px;
-
 				border-radius: 5px;
-
 			}
-
 			#clusterSizeShadow {
-
 				border: 2px solid #5599eb;
-
 				padding: 2px;
-
 				border-radius: 5px;
-
 			}
-
 			#intraclassCorrelationShadow2 {
-
 				border: 2px solid #ed6c60;
-
 				padding: 2px;
-
 				border-radius: 5px;
-
 			}
-
 			#clusterSizeShadow2 {
-
 				border: 2px solid #ed6c60;
-
 				padding: 2px;
-
 				border-radius: 5px;
-
 			}
-
 		</style>
-
 		<meta charset="UTF-8">
-
 		<title>Sample Size Estimator</title>
-
 	</head>
-
 	<body>
-
 	<div style="width:100%;">
-
 		<!-- For continuous variables -->
-
 		<div style="float:left; width:50%;">
-
 		<h3>Sample Size Estimator</h3>
-
 	  <p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
-
 			 24 Tongjia Alley, China Pharmaceutical University<br />
-
 		   Nanjing, Jiangsu, 210009</b></p>
-
 		<hr />
-
 		<h3>Sample size estimator for continuous variables</h3>
-
 		<table>
-
 	    <tr>
-
 	      <td align="right">Significance level (I error):</td>
-
 				<td align="right" width="160" height="50">
-
 				    <form align="left" id="formTypeIError" onclick="setValue();">
-
 				          <input type="radio" name="typeIErrorChoice" value=0.9 />90%
-
 				          <input type="radio" name="typeIErrorChoice" value=0.95 checked="checked" />95%
-
 				          <input type="radio" name="typeIErrorChoice" value=0.99 />99%
-
 				    </form></td>
-
 				<td align="right">Z<sub>alpha</sub>:</td>
-
 				<td align="left" id="zAlphaHtml">1.95996</td>
-
 			</tr>
-
 			<tr>
-
 			  <td align="right">Type II error probability:</td>
-
 				<td>
-
 					  <form align="left" id="formTypeIIError" onclick="setValue();">
-
                   <input type="radio" name="typeIIErrorChoice" value=0.05 />5%&nbsp
-
 								  <input type="radio" name="typeIIErrorChoice" value=0.1 />10%
-
 									<input type="radio" name="typeIIErrorChoice" value=0.2 checked="checked" />20%
-
 					  </form></td>
-
 			    <td align="right">Z<sub>beta</sub>:</td>
-
 					<td align="left" id="zBetaHtml">0.84162</td>
-
 			</tr>
-
 		</table>
-
     <table>
-
 		<tr>
-
 			<td align="right">Population mean<sub>1</sub>:</td>
-
 			<td align="right" height="30">
-
 				<form align="left" id="mean1">
-
 					<input size="10" type="text" name="mean1Input" />
-
 				</form></td>
-
 			<td align="right" width="150">Population mean<sub>2</sub>:</td>
-
 			<td align="right">
-
 			  <form align="left" id="mean2">
-
 				  <input size="10" type="text" name="mean2Input" />
-
 			  </form></td>
-
 			<td align="right" width="130">Population SD:</td>
-
 			<td align="right">
-
 				<form align="left" id="populationSD">
-
 					<input size="10" type="text" name="populationSDInput" />
-
 				</form></td>
-
 		</tr>
-
 	  </table>
-
 		<table>
-
 			<tr>
-
         <td align="right">Allocation ratio:</td>
-
         <td>
-
 					<abbr title="Fill in a value larger than 0"><form align="left" id="allocationRatio">
-
 					     <input size="5" type="text" name="allocationRatioInput" value=1 /></form></abbr></td>
-
 				<td align="right" width="200">Intraclass correlation:</td>
-
         <td>
-
 				  <abbr title="Fill in a value between 0 and 1"><form align="left" id="intraclassCorrelation">
-
 					  <input size="5" type="text" name="intraclassCorrelationInput" value=0 /></form></abbr></td>
-
 				<td align="right" width="120">Cluster size:</td>
-
 				<td>
-
 				  <abbr title="Fill in a value equal or larger than 1"><form align="left" id="clusterSize">
-
 					  <input size="5" type="text" name="clusterSizeInput" value=1 /></form></abbr></td>
-
 			</tr>
-
 		</table>
-
 	  <table>
-
 		  <tr>
-
 				<td align="right" height="30">Inflation factor:</td>
-
 				<td align="left" id="inflationFactor"></td>
-
       </tr>
-
 		</table>
-
 		<br />
-
 		<br />
-
 		<fieldset class="one" style="width:645px"><legend>Results:</legend>
-
 		  <table>
-
 			  <tr>
-
 				  <td align="right">Sample size 1:</td>
-
 				  <td align="left" width="150" id="sampleSize1">0</td>
-
 				  <td align="right" width="">Sample size 2:</td>
-
 				  <td align="left" width="150" id="sampleSize2">0</td>
-
         </tr>
-
 			  <tr>
-
 				  <td align="right" height="30">Total sample size:</td>
-
 				  <td align="left" id="totalSampleSize">0</td>
-
         </tr>
-
 			  <tr>
-
 				  <td align="right">Total sample size for CRCT:</td>
-
 				  <td align="left" id="totalSampleSizeCRCT">0</td>
-
 			  </tr>
-
 			</table>
-
 		</fieldset>
-
 		<br />
-
 		<form>
-
 			<input type="button" value="Calculate" onclick="Calculate();" />
-
 			<input type="button" value="Reset" onclick="Reset();" />
-
 		</form>
-
 		<h3>Notice:</h3>
-
 			<ul>
-
 			  <li>Significance level is inversely associated with type I error probability</li>
-
 			  <li>Type II error probability is inversely associated with power</li>
-
 			  <li>Population mean<sub>1</sub> refers to the true value for population 1</li>
-
 				<li>Population mean<sub>2</sub> refers to the true value for population 2</li>
-
 				<li><div style="display:inline" id="intraclassCorrelationShadow"><b>Intraclass correlation</b></div> measures the internal correlation <br />within a cluster, which ranges from 0 to 1 (cluster randomization only)</li>
-
 				<li><div style="display:inline" id="clusterSizeShadow"><b>Cluster size</b></div> is the number of observation within a cluster, which is <br />equal or larger than  1 (cluster randomization only)</li>
-
       </ul>
-
 			<h3>References:</h3>
-
 			<ol>
-
 				<li>Piantadosi, S. (Ed.). (2005). <i>Clinical trials: a methodologic perspective 2nd edition</i> (pp. 279). New Jersey, NJ: Wiley.</li>
-
 				<li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp. 180). New York, NY: Springer.</li>
-
 			</ol>
-
 			<hr />
-
 		</div>
-
 		<div style="float:right; width:50%;">
-
 		<!-- For proportions -->
-
 		<h3>&nbsp</h3>
-
 		<p><b>
-
 			 <br />
-
 			 <br />&nbsp
-
 		   </b></p>
-
 			 <hr />
-
 		<h3>Sample size estimator for proportions</h3>
-
 		<table>
-
 		  <tr>
-
 		    <td align="right">Significance level (I error):</td>
-
 		    <td align="right" width="160" height="50">
-
 		        <form align="left" id="formTypeIError2" onclick="setValue2();">
-
 		              <input type="radio" name="typeIErrorChoice2" value=0.9 />90%
-
 		              <input type="radio" name="typeIErrorChoice2" value=0.95 checked="checked" />95%
-
 		              <input type="radio" name="typeIErrorChoice2" value=0.99 />99%
-
 		        </form></td>
-
 		    <td align="right">Z<sub>alpha</sub>:</td>
-
 		    <td align="left" id="zAlphaHtml2">1.95996</td>
-
 		  </tr>
-
 		  <tr>
-
 		    <td align="right">Type II error probability:</td>
-
 		    <td>
-
 		        <form align="left" id="formTypeIIError2" onclick="setValue2();">
-
 		              <input type="radio" name="typeIIErrorChoice2" value=0.05 />5%&nbsp
-
 		              <input type="radio" name="typeIIErrorChoice2" value=0.1 />10%
-
 		              <input type="radio" name="typeIIErrorChoice2" value=0.2 checked="checked" />20%
-
 		        </form></td>
-
 		      <td align="right">Z<sub>beta</sub>:</td>
-
 		      <td align="left" id="zBetaHtml2">0.84162</td>
-
 		  </tr>
-
 		</table>
-
 		<table>
-
 		<tr>
-
 		  <td align="right">Population proportion<sub>1</sub>:</td>
-
 		  <td align="right" height="30">
-
 		    <abbr title="Fill in a value between 0 and 1"><form align="left" id="proportion1">
-
 		      <input size="10" type="text" name="proportion1Input" />
-
 		    </form></abbr></td>
-
 		  <td align="right" width="200">Population proportion<sub>2</sub>:</td>
-
 		  <td align="right">
-
 		    <abbr title="Fill in a value between 0 and 1"><form align="left" id="proportion2">
-
 		      <input size="10" type="text" name="proportion2Input" />
-
 		    </form></abbr></td>
-
 		</tr>
-
 		</table>
-
 		<table>
-
 		  <tr>
-
 		    <td align="right">Allocation ratio:</td>
-
 		    <td>
-
 		      <abbr title="Fill in a value larger than 0"><form align="left" id="allocationRatio2">
-
 		           <input size="5" type="text" name="allocationRatio2Input" value=1 /></form></abbr></td>
-
 		    <td align="right" width="200">Intraclass correlation:</td>
-
 		    <td>
-
 		      <abbr title="Fill in a value between 0 and 1"><form align="left" id="intraclassCorrelation2">
-
 		        <input size="5" type="text" name="intraclassCorrelation2Input" value=0 /></form></abbr></td>
-
 		    <td align="right" width="120">Cluster size:</td>
-
 		    <td>
-
 		      <abbr title="Fill in a value equal or larger than 1"><form align="left" id="clusterSize2">
-
 		        <input size="5" type="text" name="clusterSize2Input" value=1 /></form></abbr></td>
-
 		  </tr>
-
 		</table>
-
 		<table>
-
 		  <tr>
-
 		    <td align="right" height="30">Inflation factor:</td>
-
 		    <td align="left" id="inflationFactor2"></td>
-
 				<td align="right" width="180">Pooled proportion:</td>
-
 			  <td align="left" id="pooledProportion"></td>
-
 		  </tr>
-
 		</table>
-
 		<br />
-
 		<br />
-
 		<fieldset class="two" style="width:645px"><legend>Results:</legend>
-
 		  <table>
-
 		    <tr>
-
 		      <td align="right">Sample size 1:</td>
-
 		      <td align="left" width="150" id="sampleSize1Proportion">0</td>
-
 		      <td align="right" width="">Sample size 2:</td>
-
 		      <td align="left" width="150" id="sampleSize2Proportion">0</td>
-
 		    </tr>
-
 		    <tr>
-
 		      <td align="right" height="30">Total sample size:</td>
-
 		      <td align="left" id="totalSampleSizeProportion">0</td>
-
 		    </tr>
-
 		    <tr>
-
 		      <td align="right">Total sample size for CRCT:</td>
-
 		      <td align="left" id="totalSampleSizeProportionCRCT">0</td>
-
 		    </tr>
-
 		  </table>
-
 		</fieldset>
-
 		<br />
-
 		<form>
-
 		  <input type="button" value="Calculate" onclick="Calculate2();" />
-
 		  <input type="button" value="Reset" onclick="Reset2();" />
-
 		</form>
-
 		<h3>Notice:</h3>
-
 		  <ul>
-
 		    <li>Significance level is inversely associated with type I error probability</li>
-
 		    <li>Type II error probability is inversely associated with power</li>
-
 		    <li>Population proportion<sub>1</sub> refers to the true probability for population 1</li>
-
 		    <li>Population proportion<sub>2</sub> refers to the true probability for population 2</li>
-
 		    <li><div style="display:inline" id="intraclassCorrelationShadow2"><b>Intraclass correlation</b></div> measures the internal correlation <br />within a cluster, which ranges from 0 to 1 (cluster randomization only)</li>
-
 		    <li><div style="display:inline" id="clusterSizeShadow2"><b>Cluster size</b></div> is the number of observation within a cluster, which is <br />equal or larger than  1 (cluster randomization only)</li>
-
 		  </ul>
-
 		  <h3>References:</h3>
-
 		  <ol>
-
 		    <li>Piantadosi, S. (Ed.). (2005). <i>Clinical trials: a methodologic perspective 2nd edition</i> (pp. 282). New Jersey, NJ: Wiley.</li>
-
 		    <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp.172). New York, NY: Springer.</li>
-
 		  </ol>
-
 		<hr />
-
 		<h3>Contact:</h3>
-
 		<p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
-
 	  </div>
-
 	</div>
-
 		<script>
-
 		/* For continuous variables */
-
 		var type1ErrorProbability = 0.95;
-
 		var type2ErrorProbability = 0.2;
-
 		var zAlpha = 1.95996;
-
 		var zBeta = 0.84162;
-
 		var defaultType1P;
-
 		var defaultType2P;
-
 		//var sampleNumber;
-
 		var sampleNumber1;
-
 		var sampleNumber2;
-
 		var totalSampleNumber;
-
 		var totalSampleNumberCRCT;
-
 		var deltaTrueValue;
-
 		var standardDeviation;
-
 		var mean1;
-
 		var mean2;
-
 		var allocationRatio = 1;
-
 		var intraclassCorrelation = 0;
-
 		var clusterSize = 1;
-
 		var inflationFactor = 1+(clusterSize-1)*intraclassCorrelation;
-
 		document.all("inflationFactor").innerHTML = inflationFactor;
-
 		function setValue() {
-
 		  type1ErrorProbability = document.forms.formTypeIError.typeIErrorChoice.value;
-
 			type2ErrorProbability = document.forms.formTypeIIError.typeIIErrorChoice.value;
-
 			if(type1ErrorProbability == 0.9) {
-
 				zAlpha = 1.64485;
-
 			}
-
 			else if(type1ErrorProbability == 0.95) {
-
 				zAlpha = 1.95996;
-
 			}
-
 			else {
-
 				zAlpha = 2.57583;
-
 			}
-
 			document.all("zAlphaHtml").innerHTML = zAlpha;
-
 			if(type2ErrorProbability == 0.05) {
-
 				zBeta = 1.64485;
-
 			}
-
 			else if(type2ErrorProbability == 0.1) {
-
 				zBeta = 1.28155;
-
 			}
-
 			else if(type2ErrorProbability == 0.2) {
-
 				zBeta = 0.84162;
-
 			}
-
 			document.all("zBetaHtml").innerHTML = zBeta;
-
 			//alert(type2ErrorProbability);
-
 		}
-
 		function Calculate() {
-
       mean1 = Number(document.forms.mean1.mean1Input.value);
-
 			mean2 = Number(document.forms.mean2.mean2Input.value);
-
       standardDeviation = Number(document.forms.populationSD.populationSDInput.value);
-
       allocationRatio = Number(document.forms.allocationRatio.allocationRatioInput.value);
-
 			intraclassCorrelation = Number(document.forms.intraclassCorrelation.intraclassCorrelationInput.value);
-
 			clusterSize = Number(document.forms.clusterSize.clusterSizeInput.value);
-
 			deltaTrueValue = mean1-mean2;
-
       sampleNumber2 = (1/allocationRatio+1)*Math.pow(zAlpha+zBeta,2)*Math.pow(standardDeviation,2)/Math.pow(deltaTrueValue,2);
-
 			sampleNumber1 = allocationRatio*sampleNumber2;
-
 			totalSampleNumber = sampleNumber2+sampleNumber1;
-
 			//sampleNumber = 2*Math.pow(zAlpha+zBeta,2)*Math.pow(standardDeviation,2)/Math.pow(deltaTrueValue,2);
-
 			inflationFactor = 1+(clusterSize-1)*intraclassCorrelation;
-
       totalSampleNumberCRCT = totalSampleNumber*inflationFactor;
-
 			//sampleNumberCRCT = sampleNumber*inflationFactor;
-
 			//document.all("2xSampleSize").innerHTML = 2*sampleNumber;
-
 			document.all("inflationFactor").innerHTML = inflationFactor;
-
 			//document.all("2xSampleSizeCRCT").innerHTML = 2*sampleNumberCRCT;
-
 			document.all("sampleSize2").innerHTML = sampleNumber2;
-
 			document.all("sampleSize1").innerHTML = sampleNumber1;
-
 			document.all("totalSampleSize").innerHTML = totalSampleNumber;
-
 			document.all("totalSampleSizeCRCT").innerHTML = totalSampleNumberCRCT;
-
-
-
 			//alert(sampleNumber);
-
 		}
-
 		function Reset() {
-
 			document.getElementById("formTypeIError").reset();
-
 			document.getElementById("formTypeIIError").reset();
-
 			document.getElementById("mean1").reset();
-
 			document.getElementById("mean2").reset();
-
 			document.getElementById("populationSD").reset();
-
 			document.getElementById("intraclassCorrelation").reset();
-
 			document.getElementById("clusterSize").reset();
-
 			document.getElementById("allocationRatio").reset();
-
       defaultType1P = 0.95;
-
 			defaultType2P = 0.2;
-
 			type1ErrorProbability = defaultType1P;
-
 			type2ErrorProbability = defaultType2P;
-
 			zAlpha = 1.95996;
-
 			zBeta = 0.84162;
-
 			sampleNumber2 = 0;
-
 			allocationRatio = 1;
-
 			sampleNumber1 = allocationRatio*sampleNumber2;
-
 			totalSampleNumber = sampleNumber1+sampleNumber2;
-
 			clusterSize = 1;
-
 			intraclassCorrelation = 0;
-
 			inflationFactor = 1+(clusterSize -1)*intraclassCorrelation;
-
 			totalSampleNumberCRCT = inflationFactor*totalSampleNumber;
-
 			//sampleNumberCRCT = 0;
-
 			document.all("zAlphaHtml").innerHTML = zAlpha;
-
 			document.all("zBetaHtml").innerHTML = zBeta;
-
       document.all("sampleSize2").innerHTML = sampleNumber2;
-
 			document.all("sampleSize1").innerHTML = sampleNumber1;
-
 			document.all("intraclassCorrelation").inerHTML = intraclassCorrelation;
-
 			document.all("inflationFactor").innerHTML = inflationFactor;
-
 			document.all("totalSampleSize").innerHTML = totalSampleNumber;
-
 			document.all("totalSampleSizeCRCT").innerHTML = totalSampleNumberCRCT;
-
 			//alert(type2ErrorProbability);
-
     }
-
 		/* For proportions */
-
 		var type1ErrorProbability2 = 0.95;
-
 		var type2ErrorProbability2 = 0.2;
-
 		var zAlpha2 = 1.95996;
-
 		var zBeta2 = 0.84162;
-
 		var defaultType1PProportion;
-
 		var defaultType2PProportion;
-
 		var sampleNumber1Proportion;
-
 		var sampleNumber2Proportion;
-
 		var totalSampleNumberProportion;
-
 		var totalSampleNumberProportionCRCT;
-
 		var deltaTrueProbability;
-
 		var proportion1;
-
 		var proportion2;
-
 		var allocationRatio2 = 1;
-
 		var intraclassCorrelation2 = 0;
-
 		var clusterSize2 = 1;
-
 		var inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-
 		document.all("inflationFactor2").innerHTML = inflationFactor2;
-
 		var pooledProportion;
-
 		function setValue2() {
-
 		  type1ErrorProbability2 = document.forms.formTypeIError2.typeIErrorChoice2.value;
-
 		  type2ErrorProbability2 = document.forms.formTypeIIError2.typeIIErrorChoice2.value;
-
 		  if(type1ErrorProbability2 == 0.9) {
-
 		    zAlpha2 = 1.64485;
-
 		  }
-
 		  else if(type1ErrorProbability2 == 0.95) {
-
 		    zAlpha2 = 1.95996;
-
 		  }
-
 		  else {
-
 		    zAlpha2 = 2.57583;
-
 		  }
-
 		  document.all("zAlphaHtml2").innerHTML = zAlpha2;
-
 		  if(type2ErrorProbability2 == 0.05) {
-
 		    zBeta2 = 1.64485;
-
 		  }
-
 		  else if(type2ErrorProbability2 == 0.1) {
-
 		    zBeta2 = 1.28155;
-
 		  }
-
 		  else if(type2ErrorProbability2 == 0.2) {
-
 		    zBeta2 = 0.84162;
-
 		  }
-
 		  document.all("zBetaHtml2").innerHTML = zBeta2;
-
 		}
-
 		function Calculate2() {
-
 		  proportion1 = Number(document.forms.proportion1.proportion1Input.value);
-
 		  proportion2 = Number(document.forms.proportion2.proportion2Input.value);
-
 		  allocationRatio2 = Number(document.forms.allocationRatio2.allocationRatio2Input.value);
-
 		  intraclassCorrelation2 = Number(document.forms.intraclassCorrelation2.intraclassCorrelation2Input.value);
-
 		  clusterSize2 = Number(document.forms.clusterSize2.clusterSize2Input.value);
-
 			deltaTrueProbability = proportion1-proportion2;
-
 		  pooledProportion = (proportion1+allocationRatio2*proportion2)/(allocationRatio2+1);
-
 		  sampleNumber2Proportion = Math.pow(zAlpha2*Math.sqrt((allocationRatio2+1)*pooledProportion*(1-pooledProportion))+zBeta2*Math.sqrt(allocationRatio2*proportion1*(1-proportion1)+proportion2*(1-proportion2)),2)/allocationRatio2/Math.pow((proportion1-proportion2),2);
-
 		  sampleNumber1Proportion = allocationRatio2*sampleNumber2Proportion;
-
 		  totalSampleNumberProportion = sampleNumber2Proportion+sampleNumber1Proportion;
-
 		  inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-
 		  totalSampleNumberProportionCRCT = totalSampleNumberProportion*inflationFactor2;
-
 		  document.all("inflationFactor2").innerHTML = inflationFactor2;
-
 			document.all("pooledProportion").innerHTML = pooledProportion;
-
 		  document.all("sampleSize2Proportion").innerHTML = sampleNumber2Proportion;
-
 		  document.all("sampleSize1Proportion").innerHTML = sampleNumber1Proportion;
-
 		  document.all("totalSampleSizeProportion").innerHTML = totalSampleNumberProportion;
-
 		  document.all("totalSampleSizeProportionCRCT").innerHTML = totalSampleNumberProportionCRCT;
-
       //alert(pooledProportion);
-
 		}
-
 		function Reset2() {
-
 		  document.getElementById("formTypeIError2").reset();
-
 		  document.getElementById("formTypeIIError2").reset();
-
 		  document.getElementById("proportion1").reset();
-
 		  document.getElementById("proportion2").reset();
-
 		  document.getElementById("intraclassCorrelation2").reset();
-
 		  document.getElementById("clusterSize2").reset();
-
 		  document.getElementById("allocationRatio2").reset();
-
 		  defaultType1PProportion = 0.95;
-
 		  defaultType2PProportion = 0.2;
-
 		  type1ErrorProbability2 = defaultType1PProportion;
-
 		  type2ErrorProbability2 = defaultType2PProportion;
-
 		  zAlpha2 = 1.95996;
-
 		  zBeta2 = 0.84162;
-
 		  sampleNumber2Proportion = 0;
-
 		  allocationRatio2 = 1;
-
 		  sampleNumber1Proportion = 0;
-
 		  totalSampleNumberProportion = sampleNumber1Proportion+sampleNumber2Proportion;
-
 		  clusterSize2 = 1;
-
 		  intraclassCorrelation2 = 0;
-
 		  inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-
 		  totalSampleNumberProportion = 0;
-
 		  totalSampleNumberProportionCRCT = 0;
-
 		  document.all("zAlphaHtml2").innerHTML = zAlpha2;
-
 		  document.all("zBetaHtml2").innerHTML = zBeta2;
-
 		  document.all("sampleSize2Proportion").innerHTML = sampleNumber2Proportion;
-
 		  document.all("sampleSize1Proportion").innerHTML = sampleNumber1Proportion;
-
 		  document.all("intraclassCorrelation2").inerHTML = intraclassCorrelation2;
-
 		  document.all("inflationFactor2").innerHTML = inflationFactor2;
-
 		  document.all("totalSampleSizeProportion").innerHTML = totalSampleNumberProportion;
-
 		  document.all("totalSampleSizeProportionCRCT").innerHTML = totalSampleNumberProportionCRCT;
-
 	  }
-
 		</script>
-
 	</body>
-
-
-
 </html>
-
