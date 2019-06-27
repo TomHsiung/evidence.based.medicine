@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<meta copyright="Copyright Tom 'Prophet' Hsiung, M.S. Pharm, 2018" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
+<head>
+<style type="text/css">
+input[type="text"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+text-align: center;
+}
+input[type="text"]:hover {
+background-color: #ffffff;
+}
+input[type="button"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+}
+input[type="button"]:hover {
+background-color:#5599eb;
+border-radius: 5px;
+color: #ffffff;
+}
+body {
+width: 1600px;
+font-family: monospace;
+background-image:
+url("Greater_coat_of_arms_of_the_United_States.png"),
+url("1st_Marine_Division_insignia.png"),
+url("Seal_of_the_United_States_Department_of_the_Navy.png"),
+url("United_States_Department_of_Defense_Seal.png"),
+url("Seal_of_the_United_States_Marine_Corps.png");
+background-repeat: no-repeat;
+background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 95% 10%;
+background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
+background-attachment: fixed, fixed, fixed, fixed, fixed;
+}
+p {
+line-height: 1.5em;
+}
+ul {
+line-height: 1.5em;
+}
+ol {
+line-height: 1.5em;
+}
+fieldset.one {
+border: 2px solid #5599eb;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.two {
+border: 2px solid #ed6c60;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+legend {
+margin-left: 15px;
+}
+#intraclassCorrelationShadow {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#clusterSizeShadow {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#intraclassCorrelationShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+#clusterSizeShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Acid-Base imbalance Analyzer</title>
+</head>
+<body>
+<!-- div style="float:left; width:50%;" -->
+<h3>Acid-Base Disorder Diagnositc Assistance Tool</h3>
+<p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
+    24 Tongjia Alley, China Pharmaceutical University<br />
+    Nanjing, Jiangsu, 210009</b></p>
+<hr />
+<h3>Acid-Base imbalance Logic Analyzer</h3>
+<table>
+    <tr>
+        <td align="right">pH value:</td>
+        <td align="right" height="30">
+            <form alight="left" id="ph">
+            <input size="10" type="text" name="phInput" value="7.40" />
+            </form></td>
+        <td align="right" width="120">PaCO<sub>2</sub> value:</td>
+        <td align="right">
+            <form alight="left" id="paco2">
+                <input size="10" type="text" name="paco2Input" value="40" />
+            </form></td>
+    </tr>
+</table>
+<fieldset class="one" style="width:745px"><legend>Acid-Base Imbalance Diagnosis:</legend>
+<table>
+    <tr>
+        <td align="right" width="150">Acid-base imbalance present or not:</td>
+        <td align="center" width="150" id="imbalanceExistence">No</td>
+        <td align="right" width="150">Primary or mixed acid-base imbalance:</td>
+        <td align="center" width="150" id="primaryOrMixed">Null</td>
+    </tr>
+    <tr>
+        <td align="right">If primary imbalance, metabolic or respiratory:</td>
+        <td align="center" width="150" height="80" id="primaryMetabolicOrRespiratory">Null</td>
+        <td align="right" width="150">If mixed imbalance, type of metabolic and respiratory disorder:</td>
+        <td align="center" width="150" id="mixedType">Null</td>
+    </tr>
+</table>
+</fieldset>
+<h3>Response Analyzer</h3>
+<table>
+    <tr>
+        <td align="left" width="50">HCO<sub>3</sub><sup>-</sup>:</td>
+        <td align="left" height="30">
+            <form alight="left" id="hco3">
+                <input size="10" type="text" name="hco3Input" value="24" />
+            </form></td>
+        <td align="right" width="120">pH value:</td>
+        <td align="left" width="50" id="phValue">7.40</td>
+        <td align="right" width="120">PaCO<sub>2</sub> value:</td>
+        <td align="right" id="paco2Value">40</td>
+    </tr>
+<table>
+    <tr>
+        <td align="right">Acute or chronic (primary respiratory disorders):</td>
+        <td align="right" width="160" height="50">
+            <form align="left" id="formAcuteOrChronic" onclick="setValue();">
+                <input type="radio" name="AcuteOrChronicChoiceInput" value="acute" checked="checked" />acute
+                <input type="radio" name="AcuteOrChronicChoiceInput" value="chronic" />chronic
+            </form></td>
+    </tr>
+</table>
+</table>
+<fieldset class="two" style="width:745px"><legend>Expected response:</legend>
+    <table>
+        <tr>
+            <td align="right">Expected PaCO<sub>2</sub> value:</td>
+            <td align="left" width="80" id="expectedPaco2">Null</td>
+            <td align="right">Expected HCO<sub>3</sub><sup>-</sup> value:</td>
+            <td align="left" width="80" id="expectedHco3">Null</td>
+        </tr>
+</table>
+</fieldset>
+<form>
+    <input type="button" value="Analyze" onclick="Analyze();Analyze2();" />
+<input type="button" value="Reset" onclick="Reset();" />
+</form>
+<h3>Notice:</h3>
+<ul>
+    <li>PaCO<sub>2</sub> is measured in the unit of mm Hg</li>
+    <li>HCO3<sub>2</sub><sup>-</sup> is measured in the unit of mEq/L</li>
+    <li>Primary respiratory acid-base disorder has acute and chronic form</li>
+</ul>
+<hr />
+<h3>References:</h3>
+<ol>
+    <li>Marino, L Paul. (Ed.). (2013). <i>Marino's The ICU Book 4th edition</i> (pp. 587-598). Philadephia, PA: Lippincott Williams and Wilkins.</li>
+</ol>
+<hr />
+<h3>Contact:</h3>
+<p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+<!-- /div -->
+<script>
+    var phValue = 7.40;
+    var paco2Value = 40;
+    var hco3Value = 24;
+    var imbalanceExistence;
+    var primaryOrMixed;
+    var primaryMetabolicOrRespiratory;
+    var mixedType;
+    var expectedPaco2Value;
+    var expectedHco3Value;
+    var expectedHco3ChronicValue;
+    var respiratoryAcuteOrChronic = "acute";
+    function setValue() {
+        respiratoryAcuteOrChronic = document.forms.formAcuteOrChronic.AcuteOrChronicChoiceInput.value;
+    }
+    function Analyze() {
+        phValue = Number(document.forms.ph.phInput.value);
+        paco2Value = Number(document.forms.paco2.paco2Input.value);
+        hco3Value = Number(document.forms.hco3.hco3Input.value);
+        if(phValue > 7.44) {
+            imbalanceExistence = "Yes";
+        }
+        else if(phValue <7.36) {
+            imbalanceExistence = "Yes";
+        }
+        else if(paco2Value > 44) {
+            imbalanceExistence = "Yes";
+        }
+        else if(paco2Value < 36) {
+            imbalanceExistence = "Yes";
+        }
+        else {
+            imbalanceExistence = "No";
+        }
+        document.all("imbalanceExistence").innerHTML = imbalanceExistence;
+    }
+    function Analyze2() {
+        if(phValue > 7.44 && paco2Value > 44) {
+            primaryOrMixed = "Primary";
+            primaryMetabolicOrRespiratory = "Metabolic alkalosis";
+            mixedType = "Null";
+            expectedPaco2Value = 40+0.7*(hco3Value-24);
+            expectedHco3Value = "Null";
+        }
+        else if(phValue < 7.36 && paco2Value < 36) {
+            primaryOrMixed = "Primary";
+            primaryMetabolicOrRespiratory = "Metabolic acidosis";
+            mixedType ="Null";
+            expectedPaco2Value = 40-1.2*(24-hco3Value);
+            expectedHco3Value = "Null";
+        }
+        else if(phValue > 7.44 && paco2Value < 36) {
+            primaryOrMixed = "Primary";
+            primaryMetabolicOrRespiratory = "Respiratory alkalosis";
+            if(respiratoryAcuteOrChronic == "acute") {
+                expectedHco3Value = 24-0.2*(40-paco2Value);
+                document.all("expectedHco3").innerHTML = expectedHco3Value;
+            }
+            else if(respiratoryAcuteOrChronic == "chronic") {
+                expectedHco3ChronicValue = 24-0.4*(40-paco2Value);
+                document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
+            }
+            mixedType ="Null";
+            expectedPaco2Value = "Null";
+        }
+        else if(phValue < 7.36 && paco2Value > 44) {
+            primaryOrMixed = "Primary";
+            primaryMetabolicOrRespiratory = "Respiratory acidosis";
+            if(respiratoryAcuteOrChronic == "acute") {
+                expectedHco3Value = 24+0.1*(paco2Value-40);
+            }
+            else if(respiratoryAcuteOrChronic == "chronic") {
+                expectedHco3ChronicValue = 24+0.35*(paco2Value-40);
+            }
+            mixedType ="Null";
+            expectedPaco2Value = "Null";
+            if(respiratoryAcuteOrChronic == "acute") {
+                document.all("expectedHco3").innerHTML = expectedHco3Value;
+            }
+            else if(respiratoryAcuteOrChronic == "chronic") {
+                document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
+            }15
+        }
+        else if(phValue > 7.44 && paco2Value <= 44 && paco2Value >= 36) {
+            primaryOrMixed = "Mixed";
+            mixedType = "Metabolic alkalosis and respiratory acidosis";
+        }
+        else if(phValue < 7.36 && paco2Value <= 44 && paco2Value >= 36) {
+            primaryOrMixed = "Mixed";
+            mixedType = "Metabolic acidosis and respiratory alkalosis";
+        }
+        else if(paco2Value > 44 && phValue <= 7.44 && phValue >= 7.36) {
+            primaryOrMixed = "Mixed";
+            mixedType = "Respiratory acidosis and metabolic alkalosis";
+        }
+        else if(paco2Value < 36 && phValue <= 7.44 && phValue >= 7.36) {
+            primaryOrMixed = "Mixed";
+            mixedType = "Respiratory alkalosis and metabolic acidosis";
+        }
+        else {
+            primaryOrMixed = "Null";
+            primaryMetabolicOrRespiratory = "Null";
+            mixedType = "Null";
+            expectedPaco2Value = "Null";
+            expectedHco3Value = "Null";
+            expectedHco3ChronicValue = "Null";
+        }
+        document.all("primaryOrMixed").innerHTML = primaryOrMixed;
+        document.all("primaryMetabolicOrRespiratory").innerHTML = primaryMetabolicOrRespiratory;
+        document.all("mixedType").innerHTML = mixedType;
+        document.all("phValue").innerHTML = phValue;
+        document.all("paco2Value").innerHTML = paco2Value;
+        document.all("expectedPaco2").innerHTML = expectedPaco2Value;
+    }
+    function Reset() {
+        imbalanceExistence = "No";
+        primaryOrMixed = "Null";
+        primaryMetabolicOrRespiratory = "Null";
+        mixedType = "Null";
+        phValue = 7.40;
+        paco2Value = 40;
+        hco3Value = 24;
+        expectedPaco2Value = "Null";
+        expectedHco3Value = "Null";
+        expectedHco3ChronicValue = "Null";
+        document.getElementById("ph").reset();
+        document.getElementById("paco2").reset();
+        document.getElementById("hco3").reset();
+        document.all("imbalanceExistence").innerHTML = imbalanceExistence;
+        document.all("primaryOrMixed").innerHTML = primaryOrMixed;
+        document.all("primaryMetabolicOrRespiratory").innerHTML = primaryMetabolicOrRespiratory;
+        document.all("mixedType").innerHTML = mixedType;
+        document.all("phValue").innerHTML = phValue;
+        document.all("paco2Value").innerHTML = paco2Value;
+        document.all("expectedPaco2").innerHTML = expectedPaco2Value;
+        document.all("expectedHco3").innerHTML = expectedHco3Value;
+        document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
+    }
+</script>
+</body>
