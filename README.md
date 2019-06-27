@@ -4,6 +4,7 @@ Common tools for evidence-based medicine
 # Contents
 1) The file sample.size.estimator.html is used to estimate the sample size required for potential clinical studies.  
 2) The file evidence.based.DDx.html is a bayesian statistic tool to help make list of evidence-based differential diagnoses.
+3) The file acid.base.analysis.html is a simple tool to help clincians to make analysis for acid-base disorders.
 
 # How to use
 1) Copy the source code to your favorite text editior (e.g., Xcode, Atom).  
