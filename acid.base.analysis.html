@@ -233,11 +233,9 @@ border-radius: 5px;
             primaryMetabolicOrRespiratory = "Respiratory alkalosis";
             if(respiratoryAcuteOrChronic == "acute") {
                 expectedHco3Value = 24-0.2*(40-paco2Value);
-                document.all("expectedHco3").innerHTML = expectedHco3Value;
             }
             else if(respiratoryAcuteOrChronic == "chronic") {
                 expectedHco3ChronicValue = 24-0.4*(40-paco2Value);
-                document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
             }
             mixedType ="Null";
             expectedPaco2Value = "Null";
@@ -253,35 +251,37 @@ border-radius: 5px;
             }
             mixedType ="Null";
             expectedPaco2Value = "Null";
-            if(respiratoryAcuteOrChronic == "acute") {
-                document.all("expectedHco3").innerHTML = expectedHco3Value;
-            }
-            else if(respiratoryAcuteOrChronic == "chronic") {
-                document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
-            }15
         }
         else if(phValue > 7.44 && paco2Value <= 44 && paco2Value >= 36) {
             primaryOrMixed = "Mixed";
             mixedType = "Metabolic alkalosis and respiratory acidosis";
             expectedPaco2Value = "Null";
+            expectedHco3Value = "Null";
+            expectedHco3ChronicValue = "Null";
             primaryMetabolicOrRespiratory = "Null";
         }
         else if(phValue < 7.36 && paco2Value <= 44 && paco2Value >= 36) {
             primaryOrMixed = "Mixed";
             mixedType = "Metabolic acidosis and respiratory alkalosis";
             expectedPaco2Value = "Null";
+            expectedHco3Value = "Null";
+            expectedHco3ChronicValue = "Null";
             primaryMetabolicOrRespiratory = "Null";
         }
         else if(paco2Value > 44 && phValue <= 7.44 && phValue >= 7.36) {
             primaryOrMixed = "Mixed";
             mixedType = "Respiratory acidosis and metabolic alkalosis";
             expectedPaco2Value = "Null";
+            expectedHco3Value = "Null";
+            expectedHco3ChronicValue = "Null";
             primaryMetabolicOrRespiratory = "Null";
         }
         else if(paco2Value < 36 && phValue <= 7.44 && phValue >= 7.36) {
             primaryOrMixed = "Mixed";
             mixedType = "Respiratory alkalosis and metabolic acidosis";
             expectedPaco2Value = "Null";
+            expectedHco3Value = "Null";
+            expectedHco3ChronicValue = "Null";
             primaryMetabolicOrRespiratory = "Null";
         }
         else {
@@ -298,6 +298,26 @@ border-radius: 5px;
         document.all("phValue").innerHTML = phValue;
         document.all("paco2Value").innerHTML = paco2Value;
         document.all("expectedPaco2").innerHTML = expectedPaco2Value;
+        if(phValue > 7.44 && paco2Value < 36) {
+            if(respiratoryAcuteOrChronic == "acute") {
+                document.all("expectedHco3").innerHTML = expectedHco3Value;
+            }
+            else if(respiratoryAcuteOrChronic == "chronic") {
+                document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
+            }
+        }
+        else if(phValue < 7.44 && paco2Value > 36) {
+            if(respiratoryAcuteOrChronic == "acute") {
+                document.all("expectedHco3").innerHTML = expectedHco3Value;
+            }
+            else if(respiratoryAcuteOrChronic == "chronic") {
+                document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
+            }
+        }
+        else {
+            document.all("expectedHco3").innerHTML = expectedHco3Value;
+            // Or document.all("expectedHco3").innerHTML = expectedHco3ChronicValue;
+        }
     }
     function Reset() {
         imbalanceExistence = "No";
