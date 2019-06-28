@@ -295,7 +295,7 @@ border-radius: 5px;
         document.all("primaryOrMixed").innerHTML = primaryOrMixed;
         document.all("primaryMetabolicOrRespiratory").innerHTML = primaryMetabolicOrRespiratory;
         document.all("mixedType").innerHTML = mixedType;
-        document.all("phValue").innerHTML = phValue;
+        document.all("phValue").innerHTML = phValue.toFixed(2);
         document.all("paco2Value").innerHTML = paco2Value;
         document.all("expectedPaco2").innerHTML = expectedPaco2Value;
         if(phValue > 7.44 && paco2Value < 36) {
@@ -324,7 +324,7 @@ border-radius: 5px;
         primaryOrMixed = "Null";
         primaryMetabolicOrRespiratory = "Null";
         mixedType = "Null";
-        phValue = 7.40;
+        phValue = 7.40.toFixed(2);
         paco2Value = 40;
         hco3Value = 24;
         expectedPaco2Value = "Null";
