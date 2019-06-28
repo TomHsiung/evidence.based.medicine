@@ -263,18 +263,26 @@ border-radius: 5px;
         else if(phValue > 7.44 && paco2Value <= 44 && paco2Value >= 36) {
             primaryOrMixed = "Mixed";
             mixedType = "Metabolic alkalosis and respiratory acidosis";
+            expectedPaco2Value = "Null";
+            primaryMetabolicOrRespiratory = "Null";
         }
         else if(phValue < 7.36 && paco2Value <= 44 && paco2Value >= 36) {
             primaryOrMixed = "Mixed";
             mixedType = "Metabolic acidosis and respiratory alkalosis";
+            expectedPaco2Value = "Null";
+            primaryMetabolicOrRespiratory = "Null";
         }
         else if(paco2Value > 44 && phValue <= 7.44 && phValue >= 7.36) {
             primaryOrMixed = "Mixed";
             mixedType = "Respiratory acidosis and metabolic alkalosis";
+            expectedPaco2Value = "Null";
+            primaryMetabolicOrRespiratory = "Null";
         }
         else if(paco2Value < 36 && phValue <= 7.44 && phValue >= 7.36) {
             primaryOrMixed = "Mixed";
             mixedType = "Respiratory alkalosis and metabolic acidosis";
+            expectedPaco2Value = "Null";
+            primaryMetabolicOrRespiratory = "Null";
         }
         else {
             primaryOrMixed = "Null";
