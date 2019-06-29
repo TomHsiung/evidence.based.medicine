@@ -58,13 +58,13 @@ border-radius: 5px;
 legend {
 margin-left: 15px;
 }
-#intraclassCorrelationShadow {
-border: 2px solid #5599eb;
+#acuteOrChronicShadow {
+border: 2px solid #ffff00;
 padding: 2px;
 border-radius: 5px;
 }
-#clusterSizeShadow {
-border: 2px solid #5599eb;
+#referenceRange {
+border: 2px solid #ffff00;
 padding: 2px;
 border-radius: 5px;
 }
@@ -162,9 +162,11 @@ border-radius: 5px;
 </form>
 <h3>Notice:</h3>
 <ul>
+    <li>For a primary respiratory disorder, a normal or near-normal HCO<sub>3</sub><sup>-</sup> incidates that the disorder is <div style="display:inline" id="acuteOrChronicShadow"><b>acute</b></div></li>
+    <li>For a primary respiratory disorder where HCO<sub>3</sub><sup>-</sup> is abnormal, the disorder is <div style="display:inline" id="acuteOrChronicShadow"><b>chronic</b></div></li>
     <li>PaCO<sub>2</sub> is measured in the unit of mm Hg</li>
     <li>HCO<sub>3</sub><sup>-</sup> is measured in the unit of mEq/L</li>
-    <li>Reference ranges: pH 7.36 - 7.44, PaCO<sub>2</sub> 36 – 44 mm Hg, HCO<sub>3</sub><sup>-</sup> 22 – 26 mEq/L</li>
+    <li>Reference ranges: pH <div style="display:inline" id="referenceRange"><b>7.36 - 7.44</b></div>, PaCO<sub>2</sub> <div style="display:inline" id="referenceRange"><b>36 – 44 mm Hg</b></div>, HCO<sub>3</sub><sup>-</sup> <div style="display:inline" id="referenceRange"><b>22 – 26 mEq/L</b></div></li>
     <li>Primary respiratory acid-base disorder has acute and chronic forms</li>
     <li>Response analyzer is used to evaulate if a secondary acid-base disorder coexists (primary disorders only)</li>
 </ul>
