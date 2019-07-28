@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<meta copyright="Copyright Tom Hsiung, M.S. Pharm, 2019" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
+<head>
+<style type="text/css">
+input[type="text"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+text-align: center;
+}
+input[type="text"]:hover {
+background-color: #ffffff;
+}
+input[type="button"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+}
+input[type="button"]:hover {
+background-color:#5599eb;
+border-radius: 5px;
+color: #ffffff;
+}
+body {
+width: 1600px;
+font-family: monospace;
+background-image:
+url("Greater_coat_of_arms_of_the_United_States.png"),
+url("1st_Marine_Division_insignia.png"),
+url("Seal_of_the_United_States_Department_of_the_Navy.png"),
+url("United_States_Department_of_Defense_Seal.png"),
+url("Seal_of_the_United_States_Marine_Corps.png");
+background-repeat: no-repeat;
+background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 95% 10%;
+background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
+background-attachment: fixed, fixed, fixed, fixed, fixed;
+}
+p {
+line-height: 1.5em;
+}
+ul {
+line-height: 1.5em;
+}
+ol {
+line-height: 1.5em;
+}
+fieldset.one {
+border: 2px solid #5599eb;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.two {
+border: 2px solid #ed6c60;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+legend {
+margin-left: 15px;
+}
+#ExtractionRatio {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#LRShadow {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#postProbabilityShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+#LRShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Systemic Oxygenation Analyzer</title>
+</head>
+<body>
+<h3>Systemic Oxygenation Analyzer</h3>
+<p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
+    24 Tongjia Alley, China Pharmaceutical University<br />
+    Nanjing, Jiangsu, 210009</b></p>
+<hr />
+<h3>Systemic Oxygenation Analyzer</h3>
+<table>
+    <tr>
+    <td align="right">PaO<sub>2</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Oxygen in unit of mm Hg">
+        <form align="left" id="formPaO2">
+        <input size="10" type="text" name="paO2Input" />
+        </form></abbr></td>
+    <td align="right">PvO<sub>2</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Oxygen in unit of mm Hg">
+        <form align="left" id="formPvO2">
+        <input size="10" type="text" name="pvO2Input" />
+        </form></abbr></td>
+    <td align="right">SaO<sub>2</sub>:</td>
+    <td align="left" width="100">
+        <abbr title="Fill in a value between 0 and 1">
+        <form align="left" id="formSaO2">
+        <input size="10" type="text" name="saO2Input" />
+        </form></abbr></td>
+    <td align="right">Hgb:</td>
+    <td align="right">
+        <abbr title="Hgb in unit of mg/dL">
+        <form align="left" id="formHgb">
+        <input size="10" type="text" name="hgbInput" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Cardiac output:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="CO in unit of L/min">
+        <form align="left" id="formCardiacOutput">
+        <input size="10" type="text" name="coInput" />
+        </form></abbr></td>
+    <td align="right">SvO<sub>2</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Fill in a value between 0 and 1">
+        <form align="left" id="formSvO2">
+        <input size="10" type="text" name="svO2Input" />
+        </form></abbr></td>
+    <td align="right">Bronchial circulation proportion:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Fill in a value between 0 and 1">
+        <form align="left" id="formBronchialP">
+        <input size="10" type="text" name="bronchialPInput" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Core temperature:</td>
+    <td align="left" width="100" height="50">
+        <form align="left" id="formTemperature" onchange="Temperature();">
+        <input size="10" type="range" min="35" max="42" value="37" name="temperatureIput" />
+        </form></td>
+    <td align="left" width="95" id="displayTemperature">37</td>
+    <td aligh="right" width="180">Dissolving coefficient:</td>
+    <td aligh="right" id="coefficient">0.003</td>
+    </tr>
+</table>
+<fieldset class="one" style="width:840px"><legend>Results:</legend>
+<table>
+    <td align="right">Arterial O<sub>2</sub> content:</td>
+    <td align="left" width="20" id="arterialO2Content">0</td>
+    <td align="left">mL/dL</td>
+    <td align="right" width="200">Venous O<sub>2</sub> content:</td>
+    <td align="left" width="20" id="venousO2Content">0</td>
+    <td align="left">mL/dL</td>
+    <tr>
+    <td align="right" width="200">Dissolved aterial O<sub>2</sub>:</td>
+    <td align="left" width="20" id="dissolvedAterialO2">0</td>
+    <td align="left">mL/dL</td>
+    <td align="right" width="200">Dissolved venous O<sub>2</sub>:</td>
+    <td align="left" width="20" id="dissolvedVenousO2">0</td>
+    <td align="left">mL/dL</td>
+    </tr>
+    <tr>
+    <td align="right" width="200">O<sub>2</sub> delivery:</td>
+    <td align="left" width="20" id="o2Delivery">0</td>
+    <td align="left">mL/min</td>
+    <td align="right" width="200">O<sub>2</sub> uptake:</td>
+    <td align="left" width="20" id="o2Uptake">0</td>
+    <td align="left">mL/min</td>
+    </tr>
+    <tr>
+    <td align="right">Extraction ratio:</td>
+    <td align="left" width="20" id="extractionRatio">0</td>
+    <td align="left">(proprotion)</td>
+    <td align="right" width="200">O<sub>2</sub> reservation:</td>
+    <td align="left" width="20" id="o2Reservation">0</td>
+    <td align="left">mL/min</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze();" />
+<input type="button" value="Reset" onclick="Reset();" />
+</form>
+<h3>Notice:</h3>
+<ul>
+    <li>PaO<sub>2</sub> is the oxygen pressure in arterial blood, in unit of mm Hg</li>
+    <li>PvO<sub>2</sub> is the oxygen pressure in venous blood, in unit of mm Hg</li>
+    <li>SaO<sub>2</sub> is the oxyhemoglobin saturation of aterial blood</li>
+    <li>SvO<sub>2</sub> is the oxyhemoglobin saturation of venous blood</li>
+    <li>Hgb is the blood concentration of hemoglobin, in unit of g/dL</li>
+    <li>Cardiac output is the unit of L/min</li>
+    <li>Bronchial circulation proportion refers to the percentage of cardiac output toward bronnchial circulation</li>
+    <li>Core temperature is related to oxygen physical dissolving coefficent</li>
+    <li>O<sub>2</sub> delivery is the oxygen capacity carried by arterial blood</li>
+    <li>O<sub>2</sub> uptake is the oxygen amount extracted by tissue</li>
+    <li><div style="display:inline" id="ExtractionRatio"><b>Extraction ratio</b></div> is the ratio between O<sub>2</sub> uptake and O<sub>2</sub> delivery, which has a limit of approxmiately 0.5</li>
+    <li>O<sub>2</sub> reservation is oxygen capacity carried by venous blood</li>
+</ul>
+<hr />
+<h3>References:</h3>
+<ol>
+    <li>Marino, L Paul. (Ed.). (2013). <i>Marino's The ICU Book 4th edition</i> (pp. 171-183). Philadephia, PA: Lippincott Williams and Wilkins.</li>
+</ol>
+<hr />
+<h3>Contact:</h3>
+<p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+<script>
+    var cardiacOutput;
+    var hemoglobinConcentration;
+    var saO2;
+    var svO2;
+    var paO2;
+    var pvO2;
+    var bronchialCirculationP;
+    var coreTemperature;
+    var dissolvingCoefficient = 0.003;
+    var arterialO2Content;
+    var venousO2Content;
+    var dissolvedAterialO2;
+    var dissolvedVenousO2;
+    var deliveryO2;
+    var uptakeO2;
+    var extractionRatio;
+    var reserveO2;
+    function Analyze() {
+        cardiacOutput = document.forms.formCardiacOutput.coInput.value;
+        hemoglobinConcentration = document.forms.formHgb.hgbInput.value;
+        saO2 = document.forms.formSaO2.saO2Input.value;
+        svO2 = document.forms.formSvO2.svO2Input.value;
+        paO2 = document.forms.formPaO2.paO2Input.value;
+        pvO2 = document.forms.formPvO2.pvO2Input.value;
+        bronchialCirculationP = document.forms.formBronchialP.bronchialPInput.value;
+        arterialO2Content = 1.34*hemoglobinConcentration*saO2+dissolvingCoefficient*paO2;
+        venousO2Content = 1.34*hemoglobinConcentration*svO2+dissolvingCoefficient*pvO2;
+        dissolvedAterialO2 = dissolvingCoefficient*paO2;
+        dissolvedVenousO2 = dissolvingCoefficient*pvO2;
+        deliveryO2 = cardiacOutput*(1-bronchialCirculationP)*arterialO2Content*10;
+        uptakeO2 = cardiacOutput*(1-bronchialCirculationP)*arterialO2Content*10-cardiacOutput*(1-bronchialCirculationP)*venousO2Content*10;
+        reserveO2 = cardiacOutput*(1-bronchialCirculationP)*venousO2Content*10;
+        extractionRatio = uptakeO2/deliveryO2;
+        document.all("arterialO2Content").innerHTML = arterialO2Content;
+        document.all("venousO2Content").innerHTML = venousO2Content;
+        document.all("dissolvedAterialO2").innerHTML = dissolvedAterialO2;
+        document.all("dissolvedVenousO2").innerHTML = dissolvedVenousO2;
+        document.all("o2Delivery").innerHTML = deliveryO2;
+        document.all("o2Uptake").innerHTML = uptakeO2;
+        document.all("extractionRatio").innerHTML = extractionRatio;
+        document.all("o2Reservation").innerHTML = reserveO2;
+    }
+    function Temperature() {
+        coreTemperature = document.forms.formTemperature.temperatureIput.value;
+        document.all("displayTemperature").innerHTML = coreTemperature;
+    }
+    function Reset() {
+        document.getElementById("formPaO2").reset();
+        document.getElementById("formPvO2").reset();
+        document.getElementById("formSaO2").reset();
+        document.getElementById("formHgb").reset();
+        document.getElementById("formCardiacOutput").reset();
+        document.getElementById("formSvO2").reset();
+        document.getElementById("formBronchialP").reset();
+        document.getElementById("formTemperature").reset();
+        cardiacOutput = 0;
+        hemoglobinConcentration = 0;
+        saO2 = 0;
+        svO2 = 0;
+        paO2 = 0;
+        pvO2 = 0;
+        bronchialCirculationP = 0.05;
+        coreTemperature = 37;
+        dissolvingCoefficient = 0.003;
+        arterialO2Content = 0;
+        venousO2Content = 0;
+        dissolvedAterialO2 = 0;
+        dissolvedVenousO2 = 0;
+        deliveryO2 = 0;
+        uptakeO2 = 0;
+        extractionRatio = 0;
+        reserveO2 = 0;
+        document.all("displayTemperature").innerHTML = coreTemperature;
+        document.all("arterialO2Content").innerHTML = arterialO2Content;
+        document.all("venousO2Content").innerHTML = venousO2Content;
+        document.all("dissolvedAterialO2").innerHTML = dissolvedAterialO2;
+        document.all("dissolvedVenousO2").innerHTML = dissolvedVenousO2;
+        document.all("o2Delivery").innerHTML = deliveryO2;
+        document.all("o2Uptake").innerHTML = uptakeO2;
+        document.all("extractionRatio").innerHTML = extractionRatio;
+        document.all("o2Reservation").innerHTML = reserveO2;
+    }
+</script>
+</body>
+</html>
