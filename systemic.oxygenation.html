@@ -143,8 +143,8 @@ border-radius: 5px;
     <tr>
     <td align="right">Core temperature:</td>
     <td align="left" width="100" height="50">
-        <form align="left" id="formTemperature" onchange="Temperature();">
-        <input size="10" type="range" min="35" max="42" value="37" name="temperatureIput" />
+        <form align="left" id="formTemperature" oninput="Temperature();">
+            <input size="10" type="range" min="35" max="42" value="37" name="temperatureIput" />
         </form></td>
     <td align="left" width="95" id="displayTemperature">37</td>
     <td aligh="right" width="180">Dissolving coefficient:</td>
