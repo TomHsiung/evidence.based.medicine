@@ -116,11 +116,14 @@ border-radius: 5px;
         <input size="10" type="text" name="tauInput" />
         </form></abbr></td>
     <td align="right">T<sub>inf</sub>:</td>
-    <td align="right">
+    <td align="right" width="100">
         <abbr title="Infusing duration in unit of minutes">
         <form align="left" id="formTInfusion">
         <input size="10" type="text" name="tInfusionInput" value="60" />
         </form></abbr></td>
+    <td align="right">Infusing rate:</td>
+    <td align="left" width="20" id="infusionRate">0</td>
+    <td align="left">mg/min</td>
     </tr>
 </table>
 <table>
@@ -137,6 +140,9 @@ border-radius: 5px;
         <form align="left" id="formVDistribution">
         <input size="10" type="text" name="vDistributionInput" />
         </form></abbr></td>
+    <td align="right">k:</td>
+    <td align="left" width="20" id="eliminationRateConstant">0</td>
+    <td align="left">/hr</td>
     </tr>
 </table>
 <table>
@@ -220,6 +226,8 @@ border-radius: 5px;
         cNMin = cNMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
         cSsMax = saltFactor*bioFactor*infusionRate*1000/clearance*(1-Math.exp(-eliminationRateConstant*tInfusion/60))*(1-0)/(1-Math.exp(-eliminationRateConstant*tau));
         cSsMin = cSsMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
+        document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
+        document.all("infusionRate").innerHTML = infusionRate;
         document.all("cNMaxId").innerHTML = cNMax;
         document.all("cNMinId").innerHTML = cNMin;
         document.all("cSsMaxId").innerHTML = cSsMax;
@@ -239,6 +247,7 @@ border-radius: 5px;
         dose = 0;
         tau = 0;
         tInfusion = 60;
+        infusionRate = 0;
         clearance = 0;
         vDistribution = 0;
         eliminationRateConstant = 0;
@@ -251,6 +260,8 @@ border-radius: 5px;
         document.all("cNMinId").innerHTML = cNMin;
         document.all("cSsMaxId").innerHTML = cSsMax;
         document.all("cSsMinId").innerHTML = cSsMin;
+        document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
+        document.all("infusionRate").innerHTML = infusionRate;
     }
 </script>
 </body>
