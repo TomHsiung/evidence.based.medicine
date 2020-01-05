@@ -83,6 +83,7 @@ border-radius: 5px;
 <title>Drug Concentration Analyzer</title>
 </head>
 <body>
+<div style="float:left; width:50%;">
 <h3>Drug Concentration Analyzer</h3>
 <p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
     24 Tongjia Alley, China Pharmaceutical University<br />
@@ -207,6 +208,122 @@ border-radius: 5px;
 <hr />
 <h3>Contact:</h3>
 <p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+</div>
+<div style="float:left; width:50%;">
+<h3>&nbsp;</h3>
+<p><b>
+<br />
+<br />&nbsp;
+</b></p>
+<hr />
+<h3>Pharmacokinetic Parameter Esitmator</h3>
+<table>
+    <tr>
+    <td align="right">S:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Salt factor, fill in a value between 0 and 1">
+        <form align="left" id="formSaltFactor2">
+        <input size="10" type="text" name="saltFactorInput2" value="1.0" />
+        </form></abbr></td>
+    <td align="right">F:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Bioavailability factor, fill in a value between 0 and 1">
+        <form align="left" id="formBioFactor2">
+        <input size="10" type="text" name="bioFactorInput2" value="1.0" />
+        </form></abbr></td>
+    <td align="right">Dose:</td>
+    <td align="left" width="100">
+        <abbr title="Fill in a dose value in unit of mg">
+        <form align="left" id="formDose2">
+        <input size="10" type="text" name="doseInput2" />
+        </form></abbr></td>
+    <td align="right">tau:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Dosing interval in unit of hr">
+        <form align="left" id="formTau2">
+        <input size="10" type="text" name="tauInput2" />
+        </form></abbr></td>
+    <td align="right">T<sub>inf</sub>:</td>
+    <td align="right" width="100">
+        <abbr title="Infusing duration in unit of minutes">
+        <form align="left" id="formTInfusion2">
+        <input size="10" type="text" name="tInfusionInput2" value="60" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Infusing rate:</td>
+    <td align="left" width="20" id="infusionRate2">0</td>
+    <td align="left">mg/min</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">n:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Number of dose(s) administered">
+        <form align="left" id="formDoseNumber2">
+        <input size="10" type="text" name="doseNumberInput2" value="1" />
+        </form></abbr></td>
+    <td align="right">Time elapsed:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed after the beginning of number nth dose (min)">
+        <form align="left" id="formTimeElapsed">
+        <input size="10" type="text" name="timeElapsedInput" value="0" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">C<sub>n,max</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Maximum drug cencentration of number nth dose interval (mcg/mL)">
+        <form align="left" id="formCNMax2">
+        <input size="10" type="text" name="cNMax2Input" />
+        </form></abbr></td>
+    <td align="right">C<sub>n,t</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Drug concentration t time after the beginning of number nth dose (mcg/mL)" >
+        <form align="left" id="formCNT">
+        <input size="10" type="text" name="CNTInput" />
+        </form></abbr></td>
+    </tr>
+</table>
+<fieldset class="two" style="width:720px"><legend>Results:</legend>
+    <table>
+        <td align="right" width="100">Clearance:</td>
+        <td align="left" width="20" id="clearance2">0</td>
+        <td align="left">mL/min</td>
+        <td align="right" width="200">V<sub>d</sub>:</td>
+        <td align="left" width="20" id="vDistribution2">0</td>
+        <td align="left">L</td>
+        <tr>
+        <td align="right" width="100">k:</td>
+        <td align="left" width="20" id="eliminationRateConstant2">0</td>
+        <td align="left">/hr</td>
+        <td align="right" width="200">Half-life:</td>
+        <td align="left" width="20" id="halfLife2">0</td>
+        <td align="left">hr</td>
+        </tr>
+    </table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze2();" />
+<input type="button" value="Reset" onclick="Reset2();" />
+</form>
+<h3>Notice:</h3>
+<ul>
+    <li>S is the salt factor (proportion)</li>
+    <li>F is the bioavailability factor (proportion)</li>
+    <li>tau is the dose interval (hr)</li>
+    <li>T<sub>inf</sub> is the duration of infusing (min)</li>
+    <li>n is the number of dose(s) administered</li>
+    <li>C<sub>n</sub> is the drug concentration after n dose(s), in unit of mcg/mL</li>
+    <li>C<sub>n,t</sub> is the drug concentration t time after the beginning of the number nth infusion, in unit of mcg/mL</li>
+</ul>
+</div>
 <script>
     var saltFactor;
     var bioFactor;
@@ -223,6 +340,20 @@ border-radius: 5px;
     var cNMin;
     var cSsMax;
     var cSsMin;
+    var saltFactor2;
+    var bioFactor2;
+    var dose2;
+    var tau2;
+    var tInfusion2;
+    var infusionRate2;
+    var clearance2;
+    var vDistribution2;
+    var eliminationRateConstant2
+    var halfLife2;
+    var doseNumber2;
+    var timeElapsed;
+    var cNMax2;
+    var CNT;
     function Analyze() {
         saltFactor = document.forms.formSaltFactor.saltFactorInput.value;
         bioFactor = document.forms.formBioFactor.bioFactorInput.value;
@@ -278,6 +409,58 @@ border-radius: 5px;
         document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
         document.all("halfLife").innerHTML = halfLife;
         document.all("infusionRate").innerHTML = infusionRate;
+    }
+    function Analyze2() {
+    saltFactor2 = document.forms.formSaltFactor2.saltFactorInput2.value;
+    bioFactor2 = document.forms.formBioFactor2.bioFactorInput2.value;
+    dose2 = document.forms.formDose2.doseInput2.value;
+    tau2 = document.forms.formTau2.tauInput2.value;
+    tInfusion2 = document.forms.formTInfusion2.tInfusionInput2.value;
+    doseNumber2 = document.forms.formDoseNumber2.doseNumberInput2.value;
+    infusionRate2 = dose2/tInfusion2;
+    timeElapsed = document.forms.formTimeElapsed.timeElapsedInput.value;
+    cNMax2 = document.forms.formCNMax2.cNMax2Input.value;
+    CNT = document.forms.formCNT.CNTInput.value;
+    infusionRate2 = dose2/tInfusion2;
+    eliminationRateConstant2 = Math.log(CNT/cNMax2)/(tInfusion2-timeElapsed)*60;
+    halfLife2 = Math.log(2)/eliminationRateConstant2
+    clearance2 = saltFactor2*bioFactor2*infusionRate2*1000/cNMax2*(1-Math.exp(-eliminationRateConstant2*tInfusion2/60))*(1-Math.exp(-doseNumber2*eliminationRateConstant2*tau2))/(1-Math.exp(-eliminationRateConstant2*tau2));
+    vDistribution2 = clearance2/1000*60/eliminationRateConstant2;
+    document.all("clearance2").innerHTML = clearance2;
+    document.all("vDistribution2").innerHTML = vDistribution2;
+    document.all("infusionRate2").innerHTML = infusionRate2;
+    document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
+    document.all("halfLife2").innerHTML = halfLife2;
+    }
+    function Reset2() {
+    document.getElementById("formSaltFactor2").reset();
+    document.getElementById("formBioFactor2").reset();
+    document.getElementById("formDose2").reset();
+    document.getElementById("formTau2").reset();
+    document.getElementById("formTInfusion2").reset();
+    document.getElementById("formDoseNumber2").reset();
+    document.getElementById("formTimeElapsed").reset();
+    document.getElementById("formCNMax2").reset();
+    document.getElementById("formCNT").reset();
+    saltFactor2 = 1;
+    bioFactor2 = 1;
+    dose2 = 0;
+    tau2 = 0;
+    tInfusion2 = 60;
+    infusionRate2 = 0;
+    clearance2 = 0;
+    vDistribution2 = 0;
+    eliminationRateConstant2 = 0;
+    halfLife2 = 0;
+    doseNumber2 = 1;
+    timeElapsed = 0;
+    cNMax2 = 0;
+    CNT = 0;
+    document.all("clearance2").innerHTML = clearance2;
+    document.all("vDistribution2").innerHTML = vDistribution2;
+    document.all("infusionRate2").innerHTML = infusionRate2;
+    document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
+    document.all("halfLife2").innerHTML = halfLife2;
     }
 </script>
 </body>
