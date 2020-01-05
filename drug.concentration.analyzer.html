@@ -93,13 +93,13 @@ border-radius: 5px;
     <tr>
     <td align="right">S:</td>
     <td align="right" width="100" height="50">
-        <abbr title="Salt factor (proportion)">
+        <abbr title="Salt factor, fill in a value between 0 and 1">
         <form align="left" id="formSaltFactor">
         <input size="10" type="text" name="saltFactorInput" value="1.0" />
         </form></abbr></td>
     <td align="right">F:</td>
     <td align="left" width="100" height="50">
-        <abbr title="Bioavailability factor (proportion)">
+        <abbr title="Bioavailability factor, fill in a value between 0 and 1">
         <form align="left" id="formBioFactor">
         <input size="10" type="text" name="bioFactorInput" value="1.0" />
         </form></abbr></td>
@@ -121,6 +121,10 @@ border-radius: 5px;
         <form align="left" id="formTInfusion">
         <input size="10" type="text" name="tInfusionInput" value="60" />
         </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
     <td align="right">Infusing rate:</td>
     <td align="left" width="20" id="infusionRate">0</td>
     <td align="left">mg/min</td>
@@ -147,6 +151,13 @@ border-radius: 5px;
 </table>
 <table>
     <tr>
+    <td align="right">Half-life:</td>
+    <td align="left" width="20" id="halfLife">0</td>
+    <td align="left">hr</td>
+    </tr>
+</table>
+<table>
+    <tr>
     <td align="right">n:</td>
     <td align="left" width="100" height="50">
         <abbr title="Number of dose(s) administered">
@@ -157,14 +168,14 @@ border-radius: 5px;
 </table>
 <fieldset class="one" style="width:720px"><legend>Results:</legend>
 <table>
-    <td align="right">C<sub>n,max</sub>:</td>
+    <td align="right" width="100">C<sub>n,max</sub>:</td>
     <td align="left" width="20" id="cNMaxId">0</td>
     <td align="left">mcg/mL</td>
     <td align="right" width="200">C<sub>n,min</sub>:</td>
     <td align="left" width="20" id="cNMinId">0</td>
     <td align="left">mcg/mL</td>
     <tr>
-    <td align="right" width="200">C<sub>ss,max</sub>:</td>
+    <td align="right" width="100">C<sub>ss,max</sub>:</td>
     <td align="left" width="20" id="cSsMaxId">0</td>
     <td align="left">mcg/mL</td>
     <td align="right" width="200">C<sub>ss,min</sub>:</td>
@@ -206,6 +217,7 @@ border-radius: 5px;
     var clearance;
     var vDistribution;
     var eliminationRateConstant
+    var halfLife;
     var doseNumber;
     var cNMax;
     var cNMin;
@@ -222,11 +234,13 @@ border-radius: 5px;
         doseNumber = document.forms.formDoseNumber.doseNumberInput.value;
         infusionRate = dose/tInfusion;
         eliminationRateConstant = clearance*60/1000/vDistribution;
+        halfLife = Math.log(2)/eliminationRateConstant;
         cNMax = saltFactor*bioFactor*infusionRate*1000/clearance*(1-Math.exp(-eliminationRateConstant*tInfusion/60))*(1-Math.exp(-doseNumber*eliminationRateConstant*tau))/(1-Math.exp(-eliminationRateConstant*tau));
         cNMin = cNMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
         cSsMax = saltFactor*bioFactor*infusionRate*1000/clearance*(1-Math.exp(-eliminationRateConstant*tInfusion/60))*(1-0)/(1-Math.exp(-eliminationRateConstant*tau));
         cSsMin = cSsMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
         document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
+        document.all("halfLife").innerHTML = halfLife;
         document.all("infusionRate").innerHTML = infusionRate;
         document.all("cNMaxId").innerHTML = cNMax;
         document.all("cNMinId").innerHTML = cNMin;
@@ -251,6 +265,7 @@ border-radius: 5px;
         clearance = 0;
         vDistribution = 0;
         eliminationRateConstant = 0;
+        halfLife = 0;
         doseNumber = 1;
         cNMax = 0;
         cNMin = 0;
@@ -261,6 +276,7 @@ border-radius: 5px;
         document.all("cSsMaxId").innerHTML = cSsMax;
         document.all("cSsMinId").innerHTML = cSsMin;
         document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
+        document.all("halfLife").innerHTML = halfLife;
         document.all("infusionRate").innerHTML = infusionRate;
     }
 </script>
