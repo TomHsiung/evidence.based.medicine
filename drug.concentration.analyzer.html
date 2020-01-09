@@ -55,6 +55,12 @@ padding: 5px;
 text-align: left;
 border-radius: 5px;
 }
+fieldset.three {
+border: 2px solid #ffc133;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
 legend {
 margin-left: 15px;
 }
@@ -341,6 +347,95 @@ border-radius: 5px;
     <li>C<sub>n,t</sub> is the drug concentration t time after the beginning of the number nth infusion, in unit of mcg/mL</li>
     <li>Virtual C<sub>n,max</sub> refers to the maximum drug concentration when the infusion has accomplished, provided the correction for distribution phase</li>
 </ul>
+<hr />
+<h3>Drug decay emulator</h3>
+<table>
+    <tr>
+    <td align="right">C<sub>t0</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Peak drug cencentration of number nth dose interval (mcg/mL)">
+        <form align="left" id="formCT0">
+        <input size="10" type="text" name="cT0Input" />
+        </form></abbr></td>
+    <td align="right">Clearance:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Clearance in unit of mL/min" >
+        <form align="left" id="formClearance3">
+        <input size="10" type="text" name="clearance3Input" />
+        </form></abbr></td>
+    <td align="right">V<sub>d</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Volume of distribution in unit of L" >
+        <form align="left" id="formVDistribution3">
+        <input size="10" type="text" name="vDistribution3Input" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">k:</td>
+    <td align="left" width="20" id="eliminationRateConstant3">0</td>
+    <td align="left">/hr</td>
+    <td align="right" width="250" >Half-life:</td>
+    <td align="left" width="20" id="halfLife3">0</td>
+    <td align="left">hr</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right" width="120">Time elapsed<sub>1</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3A">
+        <input size="10" type="text" name="timeElapsed3AInput" value="30" />
+        </form></abbr></td>
+    <td align="right" width="120">Time elapsed<sub>2</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3B">
+        <input size="10" type="text" name="timeElapsed3BInput" value="60" />
+        </form></abbr></td>
+    </tr>
+    <tr>
+    <td align="right" width="120">Time elapsed<sub>3</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3C">
+        <input size="10" type="text" name="timeElapsed3CInput" value="120" />
+        </form></abbr></td>
+    <td align="right" width="120">Time elapsed<sub>4</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3D">
+        <input size="10" type="text" name="timeElapsed3DInput" value="240" />
+        </form></abbr></td>
+    </tr>
+</table>
+<fieldset class="three" style="width:720px"><legend>Decayed concentrations:</legend>
+<table>
+    <tr>
+    <td align="right" width="100">C<sub>t1</sub>:</td>
+    <td align="left" width="20" id="concentration1">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>t2</sub>:</td>
+    <td align="left" width="20" id="concentration2">0</td>
+    <td align="left">mcg/mL</td>
+    </tr>
+    <tr>
+    <td align="right" width="100">C<sub>t3</sub>:</td>
+    <td align="left" width="20" id="concentration3">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="100">C<sub>t4</sub>:</td>
+    <td align="left" width="20" id="concentration4">0</td>
+    <td align="left">mcg/mL</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze3();" />
+<input type="button" value="Reset" onclick="Reset3();" />
+</form>
 </div>
 <script>
     var saltFactor;
@@ -374,6 +469,19 @@ border-radius: 5px;
     var cNT0;
     var cNT;
     var virtualCNMax;
+    var concentration0;
+    var clearance3;
+    var VDistribution3;
+    var timeElapsed3A;
+    var timeElapsed3B;
+    var timeElapsed3C;
+    var timeElapsed3D;
+    var concentration1;
+    var concentration2;
+    var concentration3;
+    var concentration4;
+    var eliminationRateConstant3;
+    var halfLife3;
     function Analyze() {
         saltFactor = document.forms.formSaltFactor.saltFactorInput.value;
         bioFactor = document.forms.formBioFactor.bioFactorInput.value;
@@ -431,62 +539,111 @@ border-radius: 5px;
         document.all("infusionRate").innerHTML = infusionRate;
     }
     function Analyze2() {
-    saltFactor2 = document.forms.formSaltFactor2.saltFactorInput2.value;
-    bioFactor2 = document.forms.formBioFactor2.bioFactorInput2.value;
-    dose2 = document.forms.formDose2.doseInput2.value;
-    tau2 = document.forms.formTau2.tauInput2.value;
-    tInfusion2 = document.forms.formTInfusion2.tInfusionInput2.value;
-    doseNumber2 = document.forms.formDoseNumber2.doseNumberInput2.value;
-    infusionRate2 = dose2/tInfusion2;
-    peakTime = document.forms.formPeakTime.peakTimeInput.value;
-    timeElapsed = document.forms.formTimeElapsed.timeElapsedInput.value;
-    cNT0 = document.forms.formCNT0.cNT0Input.value;
-    cNT = document.forms.formCNT.CNTInput.value;
-    eliminationRateConstant2 = Math.log(cNT/cNT0)/(peakTime-timeElapsed)*60;
-    halfLife2 = Math.log(2)/eliminationRateConstant2;
-    virtualCNMax = cNT0/Math.exp(-eliminationRateConstant2*(peakTime-tInfusion2)/60);
-    clearance2 = saltFactor2*bioFactor2*infusionRate2*1000/virtualCNMax*(1-Math.exp(-eliminationRateConstant2*tInfusion2/60))*(1-Math.exp(-doseNumber2*eliminationRateConstant2*tau2))/(1-Math.exp(-eliminationRateConstant2*tau2));
-    vDistribution2 = clearance2/1000*60/eliminationRateConstant2;
-    document.all("clearance2").innerHTML = clearance2;
-    document.all("vDistribution2").innerHTML = vDistribution2;
-    document.all("infusionRate2").innerHTML = infusionRate2;
-    document.all("virtualCNMax").innerHTML = virtualCNMax;
-    document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
-    document.all("halfLife2").innerHTML = halfLife2;
+        saltFactor2 = document.forms.formSaltFactor2.saltFactorInput2.value;
+        bioFactor2 = document.forms.formBioFactor2.bioFactorInput2.value;
+        dose2 = document.forms.formDose2.doseInput2.value;
+        tau2 = document.forms.formTau2.tauInput2.value;
+        tInfusion2 = document.forms.formTInfusion2.tInfusionInput2.value;
+        doseNumber2 = document.forms.formDoseNumber2.doseNumberInput2.value;
+        infusionRate2 = dose2/tInfusion2;
+        peakTime = document.forms.formPeakTime.peakTimeInput.value;
+        timeElapsed = document.forms.formTimeElapsed.timeElapsedInput.value;
+        cNT0 = document.forms.formCNT0.cNT0Input.value;
+        cNT = document.forms.formCNT.CNTInput.value;
+        eliminationRateConstant2 = Math.log(cNT/cNT0)/(peakTime-timeElapsed)*60;
+        halfLife2 = Math.log(2)/eliminationRateConstant2;
+        virtualCNMax = cNT0/Math.exp(-eliminationRateConstant2*(peakTime-tInfusion2)/60);
+        clearance2 = saltFactor2*bioFactor2*infusionRate2*1000/virtualCNMax*(1-Math.exp(-eliminationRateConstant2*tInfusion2/60))*(1-Math.exp(-doseNumber2*eliminationRateConstant2*tau2))/(1-Math.exp(-eliminationRateConstant2*tau2));
+        vDistribution2 = clearance2/1000*60/eliminationRateConstant2;
+        document.all("clearance2").innerHTML = clearance2;
+        document.all("vDistribution2").innerHTML = vDistribution2;
+        document.all("infusionRate2").innerHTML = infusionRate2;
+        document.all("virtualCNMax").innerHTML = virtualCNMax;
+        document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
+        document.all("halfLife2").innerHTML = halfLife2;
     }
     function Reset2() {
-    document.getElementById("formSaltFactor2").reset();
-    document.getElementById("formBioFactor2").reset();
-    document.getElementById("formDose2").reset();
-    document.getElementById("formTau2").reset();
-    document.getElementById("formTInfusion2").reset();
-    document.getElementById("formPeakTime").reset();
-    document.getElementById("formTimeElapsed").reset();
-    document.getElementById("formDoseNumber2").reset();
-    document.getElementById("formCNT0").reset();
-    document.getElementById("formCNT").reset();
-    saltFactor2 = 1;
-    bioFactor2 = 1;
-    dose2 = 0;
-    tau2 = 0;
-    tInfusion2 = 60;
-    infusionRate2 = 0;
-    clearance2 = 0;
-    vDistribution2 = 0;
-    eliminationRateConstant2 = 0;
-    halfLife2 = 0;
-    doseNumber2 = 1;
-    peakTime = 0;
-    timeElapsed = 0;
-    cNT0 = 0;
-    cNT = 0;
-    virtualCNMax = 0;
-    document.all("virtualCNMax").innerHTML = virtualCNMax;
-    document.all("clearance2").innerHTML = clearance2;
-    document.all("vDistribution2").innerHTML = vDistribution2;
-    document.all("infusionRate2").innerHTML = infusionRate2;
-    document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
-    document.all("halfLife2").innerHTML = halfLife2;
+        document.getElementById("formSaltFactor2").reset();
+        document.getElementById("formBioFactor2").reset();
+        document.getElementById("formDose2").reset();
+        document.getElementById("formTau2").reset();
+        document.getElementById("formTInfusion2").reset();
+        document.getElementById("formPeakTime").reset();
+        document.getElementById("formTimeElapsed").reset();
+        document.getElementById("formDoseNumber2").reset();
+        document.getElementById("formCNT0").reset();
+        document.getElementById("formCNT").reset();
+        saltFactor2 = 1;
+        bioFactor2 = 1;
+        dose2 = 0;
+        tau2 = 0;
+        tInfusion2 = 60;
+        infusionRate2 = 0;
+        clearance2 = 0;
+        vDistribution2 = 0;
+        eliminationRateConstant2 = 0;
+        halfLife2 = 0;
+        doseNumber2 = 1;
+        peakTime = 0;
+        timeElapsed = 0;
+        cNT0 = 0;
+        cNT = 0;
+        virtualCNMax = 0;
+        document.all("virtualCNMax").innerHTML = virtualCNMax;
+        document.all("clearance2").innerHTML = clearance2;
+        document.all("vDistribution2").innerHTML = vDistribution2;
+        document.all("infusionRate2").innerHTML = infusionRate2;
+        document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
+        document.all("halfLife2").innerHTML = halfLife2;
+    }
+    function Analyze3() {
+        concentration0 = document.forms.formCT0.cT0Input.value;
+        clearance3 = document.forms.formClearance3.clearance3Input.value;
+        vDistribution3 = document.forms.formVDistribution3.vDistribution3Input.value;
+        timeElapsed3A = document.forms.formTimeElapsed3A.timeElapsed3AInput.value;
+        timeElapsed3B = document.forms.formTimeElapsed3B.timeElapsed3BInput.value;
+        timeElapsed3C = document.forms.formTimeElapsed3C.timeElapsed3CInput.value;
+        timeElapsed3D = document.forms.formTimeElapsed3D.timeElapsed3DInput.value;
+        eliminationRateConstant3 = clearance3/1000*60/vDistribution3;
+        halfLife3 = Math.log(2)/eliminationRateConstant3;
+        concentration1 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3A/60);
+        concentration2 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3B/60);
+        concentration3 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3C/60);
+        concentration4 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3D/60);
+        document.all("eliminationRateConstant3").innerHTML = eliminationRateConstant3;
+        document.all("halfLife3").innerHTML = halfLife3;
+        document.all("concentration1").innerHTML = concentration1;
+        document.all("concentration2").innerHTML = concentration2;
+        document.all("concentration3").innerHTML = concentration3;
+        document.all("concentration4").innerHTML = concentration4;
+    }
+    function Reset3() {
+        document.getElementById("formCT0").reset();
+        document.getElementById("formClearance3").reset();
+        document.getElementById("formVDistribution3").reset();
+        document.getElementById("formTimeElapsed3A").reset();
+        document.getElementById("formTimeElapsed3B").reset();
+        document.getElementById("formTimeElapsed3C").reset();
+        document.getElementById("formTimeElapsed3D").reset();
+        concentration0 = 0;
+        clearance3 = 0;
+        VDistribution3 = 0;
+        timeElapsed3A = 30;
+        timeElapsed3B = 60;
+        timeElapsed3C = 120;
+        timeElapsed3D = 240;
+        concentration1 = 0;
+        concentration2 = 0;
+        concentration3 = 0;
+        concentration4 = 0;
+        eliminationRateConstant3 = 0;
+        halfLife3 = 0;
+        document.all("elminationRateConstant3").innerHTML = eliminationRateConstant3;
+        document.all("halfLife3").innerHTML = halfLife3;
+        document.all("concentration1").innerHTML = concentration1;
+        document.all("concentration2").innerHTML = concentration2;
+        document.all("concentration3").innerHTML = concentration3;
+        document.all("concentration4").innerHTML = concentration4;
     }
 </script>
 </body>
