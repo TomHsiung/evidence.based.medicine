@@ -334,19 +334,7 @@ border-radius: 5px;
 <input type="button" value="Analyze" onclick="Analyze2();" />
 <input type="button" value="Reset" onclick="Reset2();" />
 </form>
-<h3>Notice:</h3>
-<ul>
-    <li>S is the salt factor (proportion)</li>
-    <li>F is the bioavailability factor (proportion)</li>
-    <li>tau is the dose interval (hr)</li>
-    <li>T<sub>inf</sub> is the duration of infusing (min)</li>
-    <li>V<sub>d</sub> is volume of distribution (L)</li>
-    <li>k is the elimination rate constant (hr<sup>-1</sup>)</li>
-    <li>n is the number of dose(s) administered</li>
-    <li>C<sub>n</sub> is the drug concentration after n dose(s), in unit of mcg/mL</li>
-    <li>C<sub>n,t</sub> is the drug concentration t time after the beginning of the number nth infusion, in unit of mcg/mL</li>
-    <li>Virtual C<sub>n,max</sub> refers to the maximum drug concentration when the infusion has accomplished, provided the correction for distribution phase</li>
-</ul>
+<br />
 <hr />
 <h3>Drug decay emulator</h3>
 <table>
@@ -436,6 +424,20 @@ border-radius: 5px;
 <input type="button" value="Analyze" onclick="Analyze3();" />
 <input type="button" value="Reset" onclick="Reset3();" />
 </form>
+<h3>Notice:</h3>
+<ul>
+    <li>S is the salt factor (proportion)</li>
+    <li>F is the bioavailability factor (proportion)</li>
+    <li>tau is the dose interval (hr)</li>
+    <li>T<sub>inf</sub> is the duration of infusing (min)</li>
+    <li>V<sub>d</sub> is volume of distribution (L)</li>
+    <li>k is the elimination rate constant (hr<sup>-1</sup>)</li>
+    <li>n is the number of dose(s) administered</li>
+    <li>C<sub>n</sub> is the drug concentration after n dose(s), in unit of mcg/mL</li>
+    <li>C<sub>n,t</sub> is the drug concentration t time after the beginning of the number nth infusion, in unit of mcg/mL</li>
+    <li>Virtual C<sub>n,max</sub> refers to the maximum drug concentration when the infusion has accomplished, provided the correction for distribution phase</li>
+    <li>C<sub>tn</sub> (mcg/mL) is the drug concentration at different time points once the drug administration has finished</li>
+</ul>
 </div>
 <script>
     var saltFactor;
