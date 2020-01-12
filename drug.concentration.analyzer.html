@@ -61,6 +61,12 @@ padding: 5px;
 text-align: left;
 border-radius: 5px;
 }
+fieldset.four {
+border: 2px solid #68ad03;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
 legend {
 margin-left: 15px;
 }
@@ -175,12 +181,14 @@ border-radius: 5px;
 </table>
 <fieldset class="one" style="width:720px"><legend>Predicted drug concentration:</legend>
 <table>
+    <tr>
     <td align="right" width="100">C<sub>n,max</sub>:</td>
     <td align="left" width="20" id="cNMaxId">0</td>
     <td align="left">mcg/mL</td>
     <td align="right" width="200">C<sub>n,min</sub>:</td>
     <td align="left" width="20" id="cNMinId">0</td>
     <td align="left">mcg/mL</td>
+    </tr>
     <tr>
     <td align="right" width="100">C<sub>ss,max</sub>:</td>
     <td align="left" width="20" id="cSsMaxId">0</td>
@@ -196,6 +204,64 @@ border-radius: 5px;
 <input type="button" value="Analyze" onclick="Analyze();" />
 <input type="button" value="Reset" onclick="Reset();" />
 </form>
+<br />
+<hr />
+<h3>Loading dose predictor</h3>
+<table>
+    <tr>
+    <td align="right">S:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Salt factor, fill in a value between 0 and 1">
+        <form align="left" id="formSaltFactor4">
+        <input size="10" type="text" name="saltFactor4Input" value="1.0" />
+        </form></abbr></td>
+    <td align="right">F:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Bioavailability factor, fill in a value between 0 and 1">
+        <form align="left" id="formBioFactor4">
+        <input size="10" type="text" name="bioFactor4Input" value="1.0" />
+        </form></abbr></td>
+    <td align="right">Dose:</td>
+    <td align="left" width="100">
+        <abbr title="Fill in a dose value in unit of mg">
+        <form align="left" id="formDose4">
+        <input size="10" type="text" name="dose4Input" />
+        </form></abbr></td>
+    </tr>
+    <tr>
+    <td align="right">V<sub>d</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Volume of distribution in unit of L">
+        <form align="left" id="formVDistribution4">
+        <input size="10" type="text" name="vDistribution4Input" />
+        </form></abbr></td>
+    </tr>
+    <tr>
+    <td align="right">C<sub>present</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Drug concentration exist in body so far (mcg/mL)">
+        <form align="left" id="formCPresent">
+        <input size="10" type="text" name="cPresentInput" value="0" />
+        </form></abbr></td>
+    </tr>
+</table>
+<fieldset class="four" style="width:720px"><legend>Predicted drug concentration after loading dose:</legend>
+<table>
+    <tr>
+    <td align="right" width="100">C:</td>
+    <td align="left" width="20" id="concentrationAfterLD">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>LD</sub>:</td>
+    <td align="left" width="20" id="concentrationByLD">0</td>
+    <td align="left">mcg/mL</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze4();" />
+<input type="button" value="Reset" onclick="Reset4();" />
+</form>
 <h3>Notice:</h3>
 <ul>
     <li>S is the salt factor (proportion)</li>
@@ -207,6 +273,8 @@ border-radius: 5px;
     <li>n is the number of dose(s) administered</li>
     <li>C<sub>n</sub> is the drug concentration after n dose(s), in unit of mcg/mL</li>
     <li>C<sub>ss</sub> is the steady state drug concentration, in unit of mcg/mL</li>
+    <li>C is the total drug concentration after loading dose administered, in unit of mcg/mL</li>
+    <li>C<sub>LD</sub> is the drug concentration contributed via that loading dose, in unit of mcg/mL</li>
 </ul>
 <hr />
 <h3>References:</h3>
@@ -312,22 +380,24 @@ border-radius: 5px;
     </tr>
 </table>
 <fieldset class="two" style="width:720px"><legend>Esimated PK parameters:</legend>
-    <table>
-        <td align="right" width="100">Clearance:</td>
-        <td align="left" width="20" id="clearance2">0</td>
-        <td align="left">mL/min</td>
-        <td align="right" width="200">V<sub>d</sub>:</td>
-        <td align="left" width="20" id="vDistribution2">0</td>
-        <td align="left">L</td>
-        <tr>
-        <td align="right" width="100">k:</td>
-        <td align="left" width="20" id="eliminationRateConstant2">0</td>
-        <td align="left">/hr</td>
-        <td align="right" width="200">Half-life:</td>
-        <td align="left" width="20" id="halfLife2">0</td>
-        <td align="left">hr</td>
-        </tr>
-    </table>
+<table>
+    <tr>
+    <td align="right" width="100">Clearance:</td>
+    <td align="left" width="20" id="clearance2">0</td>
+    <td align="left">mL/min</td>
+    <td align="right" width="200">V<sub>d</sub>:</td>
+    <td align="left" width="20" id="vDistribution2">0</td>
+    <td align="left">L</td>
+    </tr>
+    <tr>
+    <td align="right" width="100">k:</td>
+    <td align="left" width="20" id="eliminationRateConstant2">0</td>
+    <td align="left">/hr</td>
+    <td align="right" width="200">Half-life:</td>
+    <td align="left" width="20" id="halfLife2">0</td>
+    <td align="left">hr</td>
+    </tr>
+</table>
 </fieldset>
 <br />
 <form>
@@ -484,6 +554,13 @@ border-radius: 5px;
     var concentration4;
     var eliminationRateConstant3;
     var halfLife3;
+    var saltFactor4;
+    var bioFactor4;
+    var dose4;
+    var vDistribution4;
+    var cPresent;
+    var concentrationByLD;
+    var concentrationAfterLD;
     function Analyze() {
         saltFactor = document.forms.formSaltFactor.saltFactorInput.value;
         bioFactor = document.forms.formBioFactor.bioFactorInput.value;
@@ -650,6 +727,33 @@ border-radius: 5px;
         document.all("concentration2").innerHTML = concentration2;
         document.all("concentration3").innerHTML = concentration3;
         document.all("concentration4").innerHTML = concentration4;
+    }
+    function Analyze4() {
+        saltFactor4 = document.forms.formSaltFactor4.saltFactor4Input.value;
+        bioFactor4 = document.forms.formBioFactor4.bioFactor4Input.value;
+        dose4 = document.forms.formDose4.dose4Input.value;
+        vDistribution4 = document.forms.formVDistribution4.vDistribution4Input.value;
+        cPresent = document.forms.formCPresent.cPresentInput.value;
+        concentrationByLD = dose4/vDistribution4;
+        concentrationAfterLD = Number(cPresent)+concentrationByLD;
+        document.all("concentrationAfterLD").innerHTML = concentrationAfterLD;
+        document.all("concentrationByLD").innerHTML = concentrationByLD;
+    }
+    function Reset4() {
+        document.getElementById("formSaltFactor4").reset();
+        document.getElementById("formBioFactor4").reset();
+        document.getElementById("formDose4").reset();
+        document.getElementById("formVDistribution4").reset();
+        document.getElementById("formCPresent").reset();
+        saltFactor4 = 1;
+        bioFactor4 = 1;
+        dose4 = 0;
+        vDistribution4 = 0;
+        cPresent = 0;
+        concentrationByLD = 0;
+        concentrationAfterLD = 0;
+        document.all("concentrationAfterLD").innerHTML = concentrationAfterLD;
+        document.all("concentrationByLD").innerHTML = concentrationByLD;
     }
 </script>
 </body>
