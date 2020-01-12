@@ -734,7 +734,7 @@ border-radius: 5px;
         dose4 = document.forms.formDose4.dose4Input.value;
         vDistribution4 = document.forms.formVDistribution4.vDistribution4Input.value;
         cPresent = document.forms.formCPresent.cPresentInput.value;
-        concentrationByLD = dose4/vDistribution4;
+        concentrationByLD = saltFactor4*bioFactor4*dose4/vDistribution4;
         concentrationAfterLD = Number(cPresent)+concentrationByLD;
         document.all("concentrationAfterLD").innerHTML = concentrationAfterLD;
         document.all("concentrationByLD").innerHTML = concentrationByLD;
