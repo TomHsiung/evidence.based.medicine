@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<meta copyright="Copyright Tom Hsiung, M.S. Pharm, 2019" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
+<head>
+<style type="text/css">
+input[type="text"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+text-align: center;
+}
+input[type="text"]:hover {
+background-color: #ffffff;
+}
+input[type="button"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+}
+input[type="button"]:hover {
+background-color:#5599eb;
+border-radius: 5px;
+color: #ffffff;
+}
+body {
+width: 1600px;
+font-family: monospace;
+background-image:
+url("Greater_coat_of_arms_of_the_United_States.png"),
+url("1st_Marine_Division_insignia.png"),
+url("Seal_of_the_United_States_Department_of_the_Navy.png"),
+url("United_States_Department_of_Defense_Seal.png"),
+url("Seal_of_the_United_States_Marine_Corps.png");
+background-repeat: no-repeat;
+background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 95% 10%;
+background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
+background-attachment: fixed, fixed, fixed, fixed, fixed;
+}
+p {
+line-height: 1.5em;
+}
+ul {
+line-height: 1.5em;
+}
+ol {
+line-height: 1.5em;
+}
+fieldset.one {
+border: 2px solid #5599eb;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.two {
+border: 2px solid #ed6c60;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.three {
+border: 2px solid #ffc133;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.four {
+border: 2px solid #68ad03;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+legend {
+margin-left: 15px;
+}
+#ExtractionRatio {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#LRShadow {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#postProbabilityShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+#LRShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Plasma Protein Binding Analyzer</title>
+</head>
+<body>
+<h3>Plasma Protein Binding Analyzer</h3>
+<p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
+    24 Tongjia Alley, China Pharmaceutical University<br />
+    Nanjing, Jiangsu, 210009</b></p>
+<hr />
+<h3>Plasma Protein Binding Analyzer</h3>
+<table>
+    <tr>
+    <td align="right">K<sub>d1</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Protein binding dissociation constant (g/dL)">
+        <form align="left" id="formDissociationC1">
+        <input size="10" type="text" name="dissociationC1Input" />
+        </form></abbr></td>
+    <td align="right">P<sub>T1</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Total plasma protein concentration (g/dL)">
+        <form align="left" id="formTotalPC1">
+        <input size="10" type="text" name="totalPC1Input" />
+        </form></abbr></td>
+    <td align="right">fu<sub>1</sub>:</td>
+    <td align="left" width="20" id="fractionOU1">0</td>
+    <td align="left">%</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Protein bidning portion<sub>1</sub>:</td>
+    <td align="left" width="20" id="proteinBP1">0</td>
+    <td align="left">%</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">K<sub>d2</sub>:</td>
+    <td align="left" width="100">
+        <abbr title="Protein binding dissociation constant (g/dL)">
+        <form align="left" id="formDissociationC2">
+        <input size="10" type="text" name="dissociationC2Input" />
+        </form></abbr></td>
+    <td align="right">P<sub>T2</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Total plasma protein concentration (g/dL)">
+        <form align="left" id="formTotalPC2">
+        <input size="10" type="text" name="totalPC2Input" value="4.5" />
+        </form></abbr></td>
+    <td align="right">fu<sub>2</sub>:</td>
+    <td align="left" width="20" id="fractionOU2">0</td>
+    <td align="left">%</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Protein binding portion<sub>2</sub>:</td>
+    <td align="left" width="20" id="proteinBP2">0</td>
+    <td align="left">%</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right" height="50">C<sub>1</sub>:</td>
+    <td align="left" width="100">
+        <abbr title="Total plasma drug concentration (mcg/mL)">
+        <form align="left" id="formTotalPDC1">
+        <input size="10" type="text" name="totalPDC1Input" />
+        </form></abbr></td>
+    <td align="right">C<sub>2</sub>:</td>
+    <td align="left" width="100">
+        <abbr title="Total plasma drug concentration (mcg/mL)">
+        <form align="left" id="formTotalPDC2">
+        <input size="10" type="text" name="totalPDC2Input" />
+        </form></abbr></td>
+    </tr>
+</table>
+<br />
+<fieldset class="one" style="width:720px"><legend>Unbound drug concentration:</legend>
+<table>
+    <tr>
+    <td align="right" width="100">C<sub>u,1</sub>:</td>
+    <td align="left" width="20" id="concentrationUB1">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>u,2</sub>:</td>
+    <td align="left" width="20" id="concentrationUB2">0</td>
+    <td align="left">mcg/mL</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze();" />
+<input type="button" value="Reset" onclick="Reset();" />
+</form>
+<h3>Notice:</h3>
+<ul>
+    <li>K<sub>d</sub> is the dissociation constant for drug-protein binding (g/dL)</li>
+    <li>P<sub>T</sub> is the total plasma protein concentration (g/dL)</li>
+    <li>fu is the fraction of unbound drug (percentage)</li>
+    <li>C is the total plasma drug concentration (mcg/mL)</li>
+    <li>C<sub>u</sub> is the plasma unbound drug concentration (mcg/mL)</li>
+</ul>
+<hr />
+<h3>References:</h3>
+<ol>
+    <li>Rosenbaum, E Sara. (Ed.). (2016). <i>Basic Pharmacokinetics and Pharmacodynamics: An Integrated Textbook and Computer Simulations 2nd Edition</i> (pp. 82-86). Hoboken, NJ: Wiley.</li>
+</ol>
+<hr />
+<h3>Contact:</h3>
+<p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+<script>
+    var dissociationC1;
+    var dissociationC2;
+    var totalPC1;
+    var totalPC2;
+    var fractionOU1;
+    var fractionOU2;
+    var proteinBP1;
+    var proteinBP2;
+    var totalPDC1;
+    var totalPDC2;
+    var concentrationUB1;
+    var concentrationUB2;
+    function Analyze() {
+        dissociationC1 = document.forms.formDissociationC1.dissociationC1Input.value;
+        dissociationC2 = document.forms.formDissociationC2.dissociationC2Input.value;
+        totalPC1 = document.forms.formTotalPC1.totalPC1Input.value;
+        totalPC2 = document.forms.formTotalPC2.totalPC2Input.value;
+        totalPDC1 = document.forms.formTotalPDC1.totalPDC1Input.value;
+        totalPDC2 = document.forms.formTotalPDC2.totalPDC2Input.value;
+        fractionOU1 = 100*dissociationC1/(Number(dissociationC1)+Number(totalPC1));
+        fractionOU2 = 100*dissociationC2/(Number(dissociationC2)+Number(totalPC2));
+        proteinBP1 = 100-fractionOU1;
+        proteinBP2 = 100-fractionOU2;
+        concentrationUB1 = totalPDC1*fractionOU1/100;
+        concentrationUB2 = totalPDC2*fractionOU2/100;
+        document.all("fractionOU1").innerHTML = fractionOU1;
+        document.all("fractionOU2").innerHTML = fractionOU2;
+        document.all("proteinBP1").innerHTML = proteinBP1;
+        document.all("proteinBP2").innerHTML = proteinBP2;
+        document.all("concentrationUB1").innerHTML = concentrationUB1;
+        document.all("concentrationUB2").innerHTML = concentrationUB2;
+    }
+    function Reset() {
+        document.getElementById("formDissociationC1").reset();
+        document.getElementById("formDissociationC2").reset();
+        document.getElementById("formTotalPC1").reset();
+        document.getElementById("formTotalPC2").reset();
+        document.getElementById("formTotalPDC1").reset();
+        document.getElementById("formTotalPDC2").reset();
+        dissociationC1 = 0;
+        dissociationC2 = 0;
+        totalPC1 = 0;
+        totalPC2 = 4.5;
+        fractionOU1 = 0;
+        fractionOU2 = 0;
+        proteinBP1 = 0;
+        proteinBP2 = 0;
+        totalPDC1 = 0;
+        totalPDC2 = 0;
+        concentrationUB1 = 0;
+        concentrationUB2 = 0;
+        document.all("fractionOU1").innerHTML = fractionOU1;
+        document.all("fractionOU2").innerHTML = fractionOU2;
+        document.all("proteinBP1").innerHTML = proteinBP1;
+        document.all("proteinBP2").innerHTML = proteinBP2;
+        document.all("concentrationUB1").innerHTML = concentrationUB1;
+        document.all("concentrationUB2").innerHTML = concentrationUB2;
+    }
+</script>
+</body>
+</html>
