@@ -22,7 +22,7 @@
         color: #ffffff;
     }
     body {
-        width: 1600px;
+        width: 99%;
         font-family: monospace;
         background-image:
             url("Greater_coat_of_arms_of_the_United_States.png"),
@@ -31,9 +31,9 @@
             url("United_States_Department_of_Defense_Seal.png"),
             url("Seal_of_an_Embassy_of_the_United_States_of_America.png");
         background-repeat: no-repeat;
-        background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 2.5%;
-        background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
-        background-attachment: fixed, fixed, fixed, fixed, fixed;
+        background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 19px;
+        background-size: 30%, 7.5%, 7.5%, 7.5%, 135px;
+        background-attachment: fixed, fixed, fixed, fixed, scroll;
     }
     p {
         line-height: 1.5em;
@@ -56,6 +56,12 @@
         text-align: left;
         border-radius: 5px;
     }
+.row {
+display: flex;
+}
+.column {
+flex: 50%;
+}
     legend {
         margin-left: 15px;
     }
@@ -89,7 +95,8 @@
     24 Tongjia Alley, China Pharmaceutical University<br />
     Nanjing, Jiangsu, 210009</b></p>
 <hr />
-<div style="float:left; width:50%;">
+<div class="row">
+<div class="column">
 <h3>Bayesian probability estimator for diagnosis / condition</h3>
 <table>
     <tr>
@@ -154,7 +161,7 @@
     <li><div style="display:inline" id="LRShadow"><b>LR</b></div> means likelihood ratio, that is, the probability of finding in patients with<br /> diease divided by the probability of same finding in patients without disease</li>
 </ul>
 </div>
-<div style="float:left; width:50%;">
+<div class="column">
 <h3>Continued Bayesian probability estimator for diagnosis / condition</h3>
 <table>
     <tr>
@@ -219,7 +226,9 @@
     <li><div style="display:inline" id="LRShadow2"><b>LR</b></div> means likelihood ratio, that is, the probability of finding in patients with</br /> diease divided by the probability of same finding in patients without disease</li>
 </ul>
 </div>
-<div style="float:left; width:100%;">
+</div>
+<div class="row">
+<div class="column" style="width:100%;">
 <hr />
 <h3>References:</h3>
 <ol>
@@ -228,6 +237,7 @@
 <hr />
 <h3>Contact:</h3>
 <p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+</div>
 </div>
 <script>
     var preP;
