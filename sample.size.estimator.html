@@ -1,312 +1,523 @@
 <!DOCTYPE html>
 <html>
-<meta copyright="Copyright Tom 'Prophet' Hsiung, M.S. Pharm, 2018" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
+<meta copyright="Copyright Tom Hsiung, M.S. Pharm, 2019" name="viewpoint" content="initial-scale=1.0, user-scalable=yes" />
 <head>
 <style type="text/css">
-    input[type="text"] {
-        background-color: #f2f2f2;
-        border-radius: 5px;
-        text-align: center;
-    }
-    input[type="text"]:hover {
-        background-color: #ffffff;
-    }
-    input[type="button"] {
-        background-color: #f2f2f2;
-        border-radius: 5px;
-    }
-    input[type="button"]:hover {
-        background-color:#5599eb;
-        border-radius: 5px;
-        color: #ffffff;
-    }
-    body {
-        width: 99%;
-        font-family: monospace;
-        background-image:
-            url("Greater_coat_of_arms_of_the_United_States.png"),
-            url("1st_Marine_Division_insignia.png"),
-            url("Seal_of_the_United_States_Department_of_the_Navy.png"),
-            url("United_States_Department_of_Defense_Seal.png"),
-            url("Seal_of_an_Embassy_of_the_United_States_of_America.png");
-            background-repeat: no-repeat;
-            background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 19px;
-            background-size: 30%, 7.5%, 7.5%, 7.5%, 135px;
-            background-attachment: fixed, fixed, fixed, fixed, scroll;
-    }
-    p {
-        line-height: 1.5em;
-    }
-    ul {
-        line-height: 1.5em;
-    }
-    ol {
-        line-height: 1.5em;
-    }
-    fieldset.one {
-        border: 2px solid #5599eb;
-        padding: 5px;
-        text-align: left;
-        border-radius: 5px;
-    }
-    fieldset.two {
-        border: 2px solid #ed6c60;
-        padding: 5px;
-        text-align: left;
-        border-radius: 5px;
-    }
+input[type="text"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+text-align: center;
+}
+input[type="text"]:hover {
+background-color: #ffffff;
+}
+input[type="button"] {
+background-color: #f2f2f2;
+border-radius: 5px;
+}
+input[type="button"]:hover {
+background-color:#5599eb;
+border-radius: 5px;
+color: #ffffff;
+}
+body {
+width: 99%;
+font-family: monospace;
+background-image:
+url("Greater_coat_of_arms_of_the_United_States.png"),
+url("1st_Marine_Division_insignia.png"),
+url("Seal_of_the_United_States_Department_of_the_Navy.png"),
+url("United_States_Department_of_Defense_Seal.png"),
+url("Seal_of_an_Embassy_of_the_United_States_of_America.png");
+background-repeat: no-repeat;
+background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 19px;
+background-size: 30%, 7.5%, 7.5%, 7.5%, 135px;
+background-attachment: fixed, fixed, fixed, fixed, scroll;
+}
+p {
+line-height: 1.5em;
+}
+ul {
+line-height: 1.5em;
+}
+ol {
+line-height: 1.5em;
+}
+fieldset.one {
+border: 2px solid #5599eb;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.two {
+border: 2px solid #ed6c60;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.three {
+border: 2px solid #ffc133;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
+fieldset.four {
+border: 2px solid #68ad03;
+padding: 5px;
+text-align: left;
+border-radius: 5px;
+}
 .row {
 display: flex;
 }
 .column {
 flex: 50%;
 }
-    legend {
-        margin-left: 15px;
-    }
-    #intraclassCorrelationShadow {
-        border: 2px solid #5599eb;
-        padding: 2px;
-        border-radius: 5px;
-    }
-    #clusterSizeShadow {
-        border: 2px solid #5599eb;
-        padding: 2px;
-        border-radius: 5px;
-    }
-    #intraclassCorrelationShadow2 {
-        border: 2px solid #ed6c60;
-        padding: 2px;
-        border-radius: 5px;
-    }
-    #clusterSizeShadow2 {
-        border: 2px solid #ed6c60;
-        padding: 2px;
-        border-radius: 5px;
-    }
+legend {
+margin-left: 15px;
+}
+#ExtractionRatio {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#LRShadow {
+border: 2px solid #5599eb;
+padding: 2px;
+border-radius: 5px;
+}
+#postProbabilityShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
+#LRShadow2 {
+border: 2px solid #ed6c60;
+padding: 2px;
+border-radius: 5px;
+}
 </style>
 <meta charset="UTF-8">
-<title>Sample Size Estimator</title>
+<title>Drug Concentration Analyzer</title>
 </head>
 <body>
-<!-- For continuous variables -->
-<h3>Sample Size Estimator</h3>
+<h3>Drug Concentration Analyzer</h3>
 <p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
     24 Tongjia Alley, China Pharmaceutical University<br />
     Nanjing, Jiangsu, 210009</b></p>
 <hr />
 <div class="row">
 <div class="column">
-<h3>Sample size estimator for continuous variables</h3>
+<h3>Drug Concentration Predictor</h3>
 <table>
     <tr>
-    <td align="right">Significance level (I error):</td>
-    <td align="right" width="160" height="50">
-        <form align="left" id="formTypeIError" onclick="setValue();">
-        <input type="radio" name="typeIErrorChoice" value=0.9 />90%
-        <input type="radio" name="typeIErrorChoice" value=0.95 checked="checked" />95%
-        <input type="radio" name="typeIErrorChoice" value=0.99 />99%
-        </form></td>
-    <td align="right">Z<sub>alpha</sub>:</td>
-    <td align="left" id="zAlphaHtml">1.95996</td>
-    </tr>
-    <tr>
-    <td align="right">Type II error probability:</td>
-    <td>
-        <form align="left" id="formTypeIIError" onclick="setValue();">
-        <input type="radio" name="typeIIErrorChoice" value=0.05 />5%&nbsp;
-        <input type="radio" name="typeIIErrorChoice" value=0.1 />10%
-        <input type="radio" name="typeIIErrorChoice" value=0.2 checked="checked" />20%
-        </form></td>
-    <td align="right">Z<sub>beta</sub>:</td>
-    <td align="left" id="zBetaHtml">0.84162</td>
+    <td align="right">S:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Salt factor, fill in a value between 0 and 1">
+        <form align="left" id="formSaltFactor">
+        <input size="10" type="text" name="saltFactorInput" value="1.0" />
+        </form></abbr></td>
+    <td align="right">F:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Bioavailability factor, fill in a value between 0 and 1">
+        <form align="left" id="formBioFactor">
+        <input size="10" type="text" name="bioFactorInput" value="1.0" />
+        </form></abbr></td>
+    <td align="right">Dose:</td>
+    <td align="left" width="100">
+        <abbr title="Fill in a dose value in unit of mg">
+        <form align="left" id="formDose">
+        <input size="10" type="text" name="doseInput" />
+        </form></abbr></td>
+    <td align="right">tau:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Dosing interval in unit of hr">
+        <form align="left" id="formTau">
+        <input size="10" type="text" name="tauInput" />
+        </form></abbr></td>
+    <td align="right">T<sub>inf</sub>:</td>
+    <td align="right" width="100">
+        <abbr title="Infusing duration in unit of minutes">
+        <form align="left" id="formTInfusion">
+        <input size="10" type="text" name="tInfusionInput" value="60" />
+        </form></abbr></td>
     </tr>
 </table>
 <table>
     <tr>
-    <td align="right">Population mean<sub>1</sub>:</td>
-    <td align="right" height="30">
-        <form align="left" id="mean1">
-        <input size="10" type="text" name="mean1Input" />
-        </form></td>
-    <td align="right" width="150">Population mean<sub>2</sub>:</td>
-    <td align="right">
-        <form align="left" id="mean2">
-        <input size="10" type="text" name="mean2Input" />
-        </form></td>
-    <td align="right" width="130">Population SD:</td>
-    <td align="right">
-        <form align="left" id="populationSD">
-        <input size="10" type="text" name="populationSDInput" />
-        </form></td>
+    <td align="right">Infusing rate:</td>
+    <td align="left" width="20" id="infusionRate">0</td>
+    <td align="left">mg/min</td>
     </tr>
 </table>
 <table>
     <tr>
-    <td align="right">Allocation ratio:</td>
-    <td>
-        <abbr title="Fill in a value larger than 0"><form align="left" id="allocationRatio">
-        <input size="5" type="text" name="allocationRatioInput" value=1 /></form></abbr></td>
-    <td align="right" width="200">Intraclass correlation:</td>
-    <td>
-        <abbr title="Fill in a value between 0 and 1"><form align="left" id="intraclassCorrelation">
-        <input size="5" type="text" name="intraclassCorrelationInput" value=0 /></form></abbr></td>
-    <td align="right" width="120">Cluster size:</td>
-    <td>
-        <abbr title="Fill in a value equal or larger than 1"><form align="left" id="clusterSize">
-        <input size="5" type="text" name="clusterSizeInput" value=1 /></form></abbr></td>
+    <td align="right">Clearance:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Clearance in unit of mL/min">
+        <form align="left" id="formClearance">
+        <input size="10" type="text" name="clearanceInput" />
+        </form></abbr></td>
+    <td align="right">V<sub>d</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Volume of distribution in unit of L">
+        <form align="left" id="formVDistribution">
+        <input size="10" type="text" name="vDistributionInput" />
+        </form></abbr></td>
+    <td align="right">k:</td>
+    <td align="left" width="20" id="eliminationRateConstant">0</td>
+    <td align="left">/hr</td>
     </tr>
 </table>
 <table>
     <tr>
-    <td align="right" height="30">Inflation factor:</td>
-    <td align="left" id="inflationFactor"></td>
+    <td align="right">Half-life:</td>
+    <td align="left" width="20" id="halfLife">0</td>
+    <td align="left">hr</td>
     </tr>
 </table>
-<br />
-<br />
-<fieldset class="one" style="width:645px"><legend>Results:</legend>
 <table>
     <tr>
-    <td align="right">Sample size 1:</td>
-    <td align="left" width="150" id="sampleSize1">0</td>
-    <td align="right" width="">Sample size 2:</td>
-    <td align="left" width="150" id="sampleSize2">0</td>
+    <td align="right">n<sub>integer</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Number of dose(s) administered">
+        <form align="left" id="formDoseNumber">
+        <input size="10" type="text" name="doseNumberInput" value="1" />
+        </form></abbr></td>
+    </tr>
+</table>
+<fieldset class="one" style="width:720px"><legend>Predicted drug concentration:</legend>
+<table>
+    <tr>
+    <td align="right" width="100">C<sub>n,max</sub>:</td>
+    <td align="left" width="20" id="cNMaxId">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>n,min</sub>:</td>
+    <td align="left" width="20" id="cNMinId">0</td>
+    <td align="left">mcg/mL</td>
     </tr>
     <tr>
-    <td align="right" height="30">Total sample size:</td>
-    <td align="left" id="totalSampleSize">0</td>
-    </tr>
-    <tr>
-    <td align="right">Total sample size for CRCT:</td>
-    <td align="left" id="totalSampleSizeCRCT">0</td>
+    <td align="right" width="100">C<sub>ss,max</sub>:</td>
+    <td align="left" width="20" id="cSsMaxId">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>ss,min</sub>:</td>
+    <td align="left" width="20" id="cSsMinId">0</td>
+    <td align="left">mcg/mL</td>
     </tr>
 </table>
 </fieldset>
 <br />
 <form>
-<input type="button" value="Calculate" onclick="Calculate();" />
+<input type="button" value="Analyze" onclick="Analyze();" />
 <input type="button" value="Reset" onclick="Reset();" />
+</form>
+</div>
+<div class="column">
+<h3>Pharmacokinetic Parameter Esitmator</h3>
+<table>
+    <tr>
+    <td align="right">S:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Salt factor, fill in a value between 0 and 1">
+        <form align="left" id="formSaltFactor2">
+        <input size="10" type="text" name="saltFactorInput2" value="1.0" />
+        </form></abbr></td>
+    <td align="right">F:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Bioavailability factor, fill in a value between 0 and 1">
+        <form align="left" id="formBioFactor2">
+        <input size="10" type="text" name="bioFactorInput2" value="1.0" />
+        </form></abbr></td>
+    <td align="right">Dose:</td>
+    <td align="left" width="100">
+        <abbr title="Fill in a dose value in unit of mg">
+        <form align="left" id="formDose2">
+        <input size="10" type="text" name="doseInput2" />
+        </form></abbr></td>
+    <td align="right">tau:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Dosing interval in unit of hr">
+        <form align="left" id="formTau2">
+        <input size="10" type="text" name="tauInput2" />
+        </form></abbr></td>
+    <td align="right">T<sub>inf</sub>:</td>
+    <td align="right" width="100">
+        <abbr title="Infusing duration in unit of minutes">
+        <form align="left" id="formTInfusion2">
+        <input size="10" type="text" name="tInfusionInput2" value="60" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Infusing rate:</td>
+    <td align="left" width="20" id="infusionRate2">0</td>
+    <td align="left">mg/min</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Peak time (t<sub>0</sub>):</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed from the beginning of number nth dose (min) till peak concentration">
+        <form align="left" id="formPeakTime">
+        <input size="10" type="text" name="peakTimeInput" value="0" />
+        </form></abbr></td>
+    <td align="right">Time elapsed:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed after the beginning of number nth dose (min)">
+        <form align="left" id="formTimeElapsed">
+        <input size="10" type="text" name="timeElapsedInput" value="0" />
+        </form></abbr></td>
+    <td align="right">n<sub>integer</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Number of dose(s) administered">
+        <form align="left" id="formDoseNumber2">
+        <input size="10" type="text" name="doseNumberInput2" value="1" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Virtual C<sub>n,max</sub>:</td>
+    <td align="left" width="20" id="virtualCNMax">0</td>
+    <td align="left">mcg/mL</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">C<sub>n,t0</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Peak drug cencentration of number nth dose interval (mcg/mL)">
+        <form align="left" id="formCNT0">
+        <input size="10" type="text" name="cNT0Input" />
+        </form></abbr></td>
+    <td align="right">C<sub>n,t</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Drug concentration t time after the beginning of number nth dose (mcg/mL)" >
+        <form align="left" id="formCNT">
+        <input size="10" type="text" name="CNTInput" />
+        </form></abbr></td>
+    </tr>
+</table>
+<fieldset class="two" style="width:720px"><legend>Esimated PK parameters:</legend>
+<table>
+    <tr>
+    <td align="right" width="100">Clearance:</td>
+    <td align="left" width="20" id="clearance2">0</td>
+    <td align="left">mL/min</td>
+    <td align="right" width="200">V<sub>d</sub>:</td>
+    <td align="left" width="20" id="vDistribution2">0</td>
+    <td align="left">L</td>
+    </tr>
+    <tr>
+    <td align="right" width="100">k:</td>
+    <td align="left" width="20" id="eliminationRateConstant2">0</td>
+    <td align="left">/hr</td>
+    <td align="right" width="200">Half-life:</td>
+    <td align="left" width="20" id="halfLife2">0</td>
+    <td align="left">hr</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze2();" />
+<input type="button" value="Reset" onclick="Reset2();" />
+</form>
+</div>
+</div>
+<div class="row">
+<div class="column">
+<br />
+<hr />
+</div>
+</div>
+<div class="row">
+<div class="column">
+<h3>Loading dose predictor</h3>
+<table>
+    <tr>
+    <td align="right">S:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Salt factor, fill in a value between 0 and 1">
+        <form align="left" id="formSaltFactor4">
+        <input size="10" type="text" name="saltFactor4Input" value="1.0" />
+        </form></abbr></td>
+    <td align="right">F:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Bioavailability factor, fill in a value between 0 and 1">
+        <form align="left" id="formBioFactor4">
+        <input size="10" type="text" name="bioFactor4Input" value="1.0" />
+        </form></abbr></td>
+    <td align="right">Dose:</td>
+    <td align="left" width="100">
+        <abbr title="Fill in a dose value in unit of mg">
+        <form align="left" id="formDose4">
+        <input size="10" type="text" name="dose4Input" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">V<sub>d</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Volume of distribution in unit of L">
+        <form align="left" id="formVDistribution4">
+        <input size="10" type="text" name="vDistribution4Input" />
+        </form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">C<sub>present</sub>:</td>
+    <td align="right" width="100" height="50">
+        <abbr title="Drug concentration exist in body so far (mcg/mL)">
+        <form align="left" id="formCPresent">
+        <input size="10" type="text" name="cPresentInput" value="0" />
+        </form></abbr></td>
+    </tr>
+</table>
+<fieldset class="four" style="width:720px"><legend>Predicted drug concentration after loading dose:</legend>
+<table>
+    <tr>
+    <td align="right" width="100">C:</td>
+    <td align="left" width="20" id="concentrationAfterLD">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>LD</sub>:</td>
+    <td align="left" width="20" id="concentrationByLD">0</td>
+    <td align="left">mcg/mL</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Analyze" onclick="Analyze4();" />
+<input type="button" value="Reset" onclick="Reset4();" />
 </form>
 <h3>Notice:</h3>
 <ul>
-    <li>Significance level is inversely associated with type I error probability</li>
-    <li>Type II error probability is inversely associated with power</li>
-    <li>Population mean<sub>1</sub> refers to the true value for population 1</li>
-    <li>Population mean<sub>2</sub> refers to the true value for population 2</li>
-    <li><div style="display:inline" id="intraclassCorrelationShadow"><b>Intraclass correlation</b></div> measures the internal correlation <br />within a cluster, which ranges from 0 to 1 (cluster randomization only)</li>
-    <li><div style="display:inline" id="clusterSizeShadow"><b>Cluster size</b></div> is the number of observation within a cluster, which is <br />equal or larger than  1 (cluster randomization only)</li>
+    <li>S is the salt factor (proportion)</li>
+    <li>F is the bioavailability factor (proportion)</li>
+    <li>tau is the dose interval (hr)</li>
+    <li>T<sub>inf</sub> is the duration of infusing (min)</li>
+    <li>V<sub>d</sub> is volume of distribution (L)</li>
+    <li>k is the elimination rate constant (hr<sup>-1</sup>)</li>
+    <li>n<sub>integer</sub> is the number of dose(s) administered</li>
+    <li>C<sub>n</sub> is the drug concentration after n dose(s), in unit of mcg/mL</li>
+    <li>C<sub>ss</sub> is the steady state drug concentration, in unit of mcg/mL</li>
+    <li>C is the total drug concentration after loading dose administered, in unit of mcg/mL</li>
+    <li>C<sub>LD</sub> is the drug concentration contributed via that loading dose, in unit of mcg/mL</li>
 </ul>
+<hr />
 <h3>References:</h3>
 <ol>
-    <li>Piantadosi, S. (Ed.). (2005). <i>Clinical trials: a methodologic perspective 2nd edition</i> (pp. 279). New Jersey, NJ: Wiley.</li>
-    <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp. 180). New York, NY: Springer.</li>
+    <li>Rosenbaum, E Sara. (Ed.). (2016). <i>Basic Pharmacokinetics and Pharmacodynamics: An Integrated Textbook and Computer Simulations 2nd Edition</i> (pp. 281-282). Hoboken, NJ: Wiley.</li>
 </ol>
 </div>
 <div class="column">
-<!-- For proportions -->
-<h3>Sample size estimator for proportions</h3>
+<h3>Drug decay emulator</h3>
 <table>
     <tr>
-    <td align="right">Significance level (I error):</td>
-    <td align="right" width="160" height="50">
-        <form align="left" id="formTypeIError2" onclick="setValue2();">
-        <input type="radio" name="typeIErrorChoice2" value=0.9 />90%
-        <input type="radio" name="typeIErrorChoice2" value=0.95 checked="checked" />95%
-        <input type="radio" name="typeIErrorChoice2" value=0.99 />99%
-        </form></td>
-    <td align="right">Z<sub>alpha</sub>:</td>
-    <td align="left" id="zAlphaHtml2">1.95996</td>
-    </tr>
-    <tr>
-    <td align="right">Type II error probability:</td>
-    <td>
-        <form align="left" id="formTypeIIError2" onclick="setValue2();">
-        <input type="radio" name="typeIIErrorChoice2" value=0.05 />5%&nbsp;
-        <input type="radio" name="typeIIErrorChoice2" value=0.1 />10%
-        <input type="radio" name="typeIIErrorChoice2" value=0.2 checked="checked" />20%
-        </form></td>
-    <td align="right">Z<sub>beta</sub>:</td>
-    <td align="left" id="zBetaHtml2">0.84162</td>
-    </tr>
-</table>
-<table>
-    <tr>
-    <td align="right">Population proportion<sub>1</sub>:</td>
-    <td align="right" height="30">
-        <abbr title="Fill in a value between 0 and 1"><form align="left" id="proportion1">
-        <input size="10" type="text" name="proportion1Input" />
+    <td align="right">C<sub>t0</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Peak drug cencentration of number nth dose interval (mcg/mL)">
+        <form align="left" id="formCT0">
+        <input size="10" type="text" name="cT0Input" />
         </form></abbr></td>
-    <td align="right" width="200">Population proportion<sub>2</sub>:</td>
-    <td align="right">
-        <abbr title="Fill in a value between 0 and 1"><form align="left" id="proportion2">
-        <input size="10" type="text" name="proportion2Input" />
+    <td align="right">Clearance:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Clearance in unit of mL/min" >
+        <form align="left" id="formClearance3">
+        <input size="10" type="text" name="clearance3Input" />
+        </form></abbr></td>
+    <td align="right">V<sub>d</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Volume of distribution in unit of L" >
+        <form align="left" id="formVDistribution3">
+        <input size="10" type="text" name="vDistribution3Input" />
         </form></abbr></td>
     </tr>
 </table>
 <table>
     <tr>
-    <td align="right">Allocation ratio:</td>
-    <td>
-        <abbr title="Fill in a value larger than 0"><form align="left" id="allocationRatio2">
-        <input size="5" type="text" name="allocationRatio2Input" value=1 /></form></abbr></td>
-    <td align="right" width="200">Intraclass correlation:</td>
-    <td>
-        <abbr title="Fill in a value between 0 and 1"><form align="left" id="intraclassCorrelation2">
-        <input size="5" type="text" name="intraclassCorrelation2Input" value=0 /></form></abbr></td>
-    <td align="right" width="120">Cluster size:</td>
-    <td>
-        <abbr title="Fill in a value equal or larger than 1"><form align="left" id="clusterSize2">
-        <input size="5" type="text" name="clusterSize2Input" value=1 /></form></abbr></td>
+    <td align="right">k:</td>
+    <td align="left" width="20" id="eliminationRateConstant3">0</td>
+    <td align="left">/hr</td>
+    <td align="right" width="250" >Half-life:</td>
+    <td align="left" width="20" id="halfLife3">0</td>
+    <td align="left">hr</td>
     </tr>
 </table>
 <table>
     <tr>
-    <td align="right" height="30">Inflation factor:</td>
-    <td align="left" id="inflationFactor2"></td>
-    <td align="right" width="180">Pooled proportion:</td>
-    <td align="left" id="pooledProportion"></td>
+    <td align="right" width="120">Time elapsed<sub>1</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3A">
+        <input size="10" type="text" name="timeElapsed3AInput" value="30" />
+        </form></abbr></td>
+    <td align="right" width="120">Time elapsed<sub>2</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3B">
+        <input size="10" type="text" name="timeElapsed3BInput" value="60" />
+        </form></abbr></td>
+    </tr>
+    <tr>
+    <td align="right" width="120">Time elapsed<sub>3</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3C">
+        <input size="10" type="text" name="timeElapsed3CInput" value="120" />
+        </form></abbr></td>
+    <td align="right" width="120">Time elapsed<sub>4</sub>:</td>
+    <td align="left" width="100" height="50">
+        <abbr title="Time elapsed (min)">
+        <form align="left" id="formTimeElapsed3D">
+        <input size="10" type="text" name="timeElapsed3DInput" value="240" />
+        </form></abbr></td>
     </tr>
 </table>
-<br />
-<br />
-<fieldset class="two" style="width:645px"><legend>Results:</legend>
+<fieldset class="three" style="width:720px"><legend>Decayed concentrations:</legend>
 <table>
     <tr>
-    <td align="right">Sample size 1:</td>
-    <td align="left" width="150" id="sampleSize1Proportion">0</td>
-    <td align="right" width="">Sample size 2:</td>
-    <td align="left" width="150" id="sampleSize2Proportion">0</td>
+    <td align="right" width="100">C<sub>t1</sub>:</td>
+    <td align="left" width="20" id="concentration1">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="200">C<sub>t2</sub>:</td>
+    <td align="left" width="20" id="concentration2">0</td>
+    <td align="left">mcg/mL</td>
     </tr>
     <tr>
-    <td align="right" height="30">Total sample size:</td>
-    <td align="left" id="totalSampleSizeProportion">0</td>
-    </tr>
-    <tr>
-    <td align="right">Total sample size for CRCT:</td>
-    <td align="left" id="totalSampleSizeProportionCRCT">0</td>
+    <td align="right" width="100">C<sub>t3</sub>:</td>
+    <td align="left" width="20" id="concentration3">0</td>
+    <td align="left">mcg/mL</td>
+    <td align="right" width="100">C<sub>t4</sub>:</td>
+    <td align="left" width="20" id="concentration4">0</td>
+    <td align="left">mcg/mL</td>
     </tr>
 </table>
 </fieldset>
 <br />
 <form>
-<input type="button" value="Calculate" onclick="Calculate2();" />
-<input type="button" value="Reset" onclick="Reset2();" />
+<input type="button" value="Analyze" onclick="Analyze3();" />
+<input type="button" value="Reset" onclick="Reset3();" />
 </form>
 <h3>Notice:</h3>
 <ul>
-    <li>Significance level is inversely associated with type I error probability</li>
-    <li>Type II error probability is inversely associated with power</li>
-    <li>Population proportion<sub>1</sub> refers to the true probability for population 1</li>
-    <li>Population proportion<sub>2</sub> refers to the true probability for population 2</li>
-    <li><div style="display:inline" id="intraclassCorrelationShadow2"><b>Intraclass correlation</b></div> measures the internal correlation <br />within a cluster, which ranges from 0 to 1 (cluster randomization only)</li>
-    <li><div style="display:inline" id="clusterSizeShadow2"><b>Cluster size</b></div> is the number of observation within a cluster, which is <br />equal or larger than  1 (cluster randomization only)</li>
-    </ul>
-<h3>References:</h3>
-<ol>
-    <li>Piantadosi, S. (Ed.). (2005). <i>Clinical trials: a methodologic perspective 2nd edition</i> (pp. 282). New Jersey, NJ: Wiley.</li>
-    <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp.172). New York, NY: Springer.</li>
-</ol>
+    <li>S is the salt factor (proportion)</li>
+    <li>F is the bioavailability factor (proportion)</li>
+    <li>tau is the dose interval (hr)</li>
+    <li>T<sub>inf</sub> is the duration of infusing (min)</li>
+    <li>V<sub>d</sub> is volume of distribution (L)</li>
+    <li>k is the elimination rate constant (hr<sup>-1</sup>)</li>
+    <li>n<sub>integer</sub> is the number of dose(s) administered</li>
+    <li>C<sub>n</sub> is the drug concentration after n dose(s), in unit of mcg/mL</li>
+    <li>C<sub>n,t</sub> is the drug concentration t time after the beginning of the number nth infusion, in unit of mcg/mL</li>
+    <li>Virtual C<sub>n,max</sub> refers to the maximum drug concentration when the infusion has accomplished, provided the correction for distribution phase</li>
+    <li>C<sub>tn</sub> (mcg/mL) is the drug concentration at different time points once the drug administration has finished</li>
+</ul>
 </div>
 </div>
 <div class="row">
@@ -317,196 +528,250 @@ flex: 50%;
 </div>
 </div>
 <script>
-/* For continuous variables */
-    var type1ErrorProbability = 0.95;
-    var type2ErrorProbability = 0.2;
-    var zAlpha = 1.95996;
-    var zBeta = 0.84162;
-    var defaultType1P;
-    var defaultType2P;
-    var sampleNumber1;
-    var sampleNumber2;
-    var totalSampleNumber;
-    var totalSampleNumberCRCT;
-    var deltaTrueValue;
-    var standardDeviation;
-    var mean1;
-    var mean2;
-    var allocationRatio = 1;
-    var intraclassCorrelation = 0;
-    var clusterSize = 1;
-    var inflationFactor = 1+(clusterSize-1)*intraclassCorrelation;
-    document.all("inflationFactor").innerHTML = inflationFactor;
-    function setValue() {
-        type1ErrorProbability = document.forms.formTypeIError.typeIErrorChoice.value;
-        type2ErrorProbability = document.forms.formTypeIIError.typeIIErrorChoice.value;
-        if(type1ErrorProbability == 0.9) {
-            zAlpha = 1.64485;
-        }
-        else if(type1ErrorProbability == 0.95) {
-            zAlpha = 1.95996;
-        }
-        else {
-            zAlpha = 2.57583;
-        }
-        document.all("zAlphaHtml").innerHTML = zAlpha;
-        if(type2ErrorProbability == 0.05) {
-            zBeta = 1.64485;
-        }
-        else if(type2ErrorProbability == 0.1) {
-            zBeta = 1.28155;
-        }
-        else if(type2ErrorProbability == 0.2) {
-            zBeta = 0.84162;
-        }
-        document.all("zBetaHtml").innerHTML = zBeta;
-    }
-    function Calculate() {
-        mean1 = Number(document.forms.mean1.mean1Input.value);
-        mean2 = Number(document.forms.mean2.mean2Input.value);
-        standardDeviation = Number(document.forms.populationSD.populationSDInput.value);
-        allocationRatio = Number(document.forms.allocationRatio.allocationRatioInput.value);
-        intraclassCorrelation = Number(document.forms.intraclassCorrelation.intraclassCorrelationInput.value);
-        clusterSize = Number(document.forms.clusterSize.clusterSizeInput.value);
-        deltaTrueValue = mean1-mean2;
-        sampleNumber2 = (1/allocationRatio+1)*Math.pow(zAlpha+zBeta,2)*Math.pow(standardDeviation,2)/Math.pow(deltaTrueValue,2);
-        sampleNumber1 = allocationRatio*sampleNumber2;
-        totalSampleNumber = sampleNumber2+sampleNumber1;
-        inflationFactor = 1+(clusterSize-1)*intraclassCorrelation;
-        totalSampleNumberCRCT = totalSampleNumber*inflationFactor;
-        document.all("inflationFactor").innerHTML = inflationFactor;
-        document.all("sampleSize2").innerHTML = sampleNumber2;
-        document.all("sampleSize1").innerHTML = sampleNumber1;
-        document.all("totalSampleSize").innerHTML = totalSampleNumber;
-        document.all("totalSampleSizeCRCT").innerHTML = totalSampleNumberCRCT;
+    var saltFactor;
+    var bioFactor;
+    var dose;
+    var tau;
+    var tInfusion;
+    var infusionRate;
+    var clearance;
+    var vDistribution;
+    var eliminationRateConstant
+    var halfLife;
+    var doseNumber;
+    var cNMax;
+    var cNMin;
+    var cSsMax;
+    var cSsMin;
+    var saltFactor2;
+    var bioFactor2;
+    var dose2;
+    var tau2;
+    var tInfusion2;
+    var infusionRate2;
+    var clearance2;
+    var vDistribution2;
+    var eliminationRateConstant2
+    var halfLife2;
+    var doseNumber2;
+    var peakTime;
+    var timeElapsed;
+    var cNT0;
+    var cNT;
+    var virtualCNMax;
+    var concentration0;
+    var clearance3;
+    var VDistribution3;
+    var timeElapsed3A;
+    var timeElapsed3B;
+    var timeElapsed3C;
+    var timeElapsed3D;
+    var concentration1;
+    var concentration2;
+    var concentration3;
+    var concentration4;
+    var eliminationRateConstant3;
+    var halfLife3;
+    var saltFactor4;
+    var bioFactor4;
+    var dose4;
+    var vDistribution4;
+    var cPresent;
+    var concentrationByLD;
+    var concentrationAfterLD;
+    function Analyze() {
+        saltFactor = document.forms.formSaltFactor.saltFactorInput.value;
+        bioFactor = document.forms.formBioFactor.bioFactorInput.value;
+        dose = document.forms.formDose.doseInput.value;
+        tau = document.forms.formTau.tauInput.value;
+        tInfusion = document.forms.formTInfusion.tInfusionInput.value;
+        clearance = document.forms.formClearance.clearanceInput.value;
+        vDistribution = document.forms.formVDistribution.vDistributionInput.value;
+        doseNumber = document.forms.formDoseNumber.doseNumberInput.value;
+        infusionRate = dose/tInfusion;
+        eliminationRateConstant = clearance*60/1000/vDistribution;
+        halfLife = Math.log(2)/eliminationRateConstant;
+        cNMax = saltFactor*bioFactor*infusionRate*1000/clearance*(1-Math.exp(-eliminationRateConstant*tInfusion/60))*(1-Math.exp(-doseNumber*eliminationRateConstant*tau))/(1-Math.exp(-eliminationRateConstant*tau));
+        cNMin = cNMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
+        cSsMax = saltFactor*bioFactor*infusionRate*1000/clearance*(1-Math.exp(-eliminationRateConstant*tInfusion/60))*(1-0)/(1-Math.exp(-eliminationRateConstant*tau));
+        cSsMin = cSsMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
+        document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
+        document.all("halfLife").innerHTML = halfLife;
+        document.all("infusionRate").innerHTML = infusionRate;
+        document.all("cNMaxId").innerHTML = cNMax;
+        document.all("cNMinId").innerHTML = cNMin;
+        document.all("cSsMaxId").innerHTML = cSsMax;
+        document.all("cSsMinId").innerHTML = cSsMin;
     }
     function Reset() {
-        document.getElementById("formTypeIError").reset();
-        document.getElementById("formTypeIIError").reset();
-        document.getElementById("mean1").reset();
-        document.getElementById("mean2").reset();
-        document.getElementById("populationSD").reset();
-        document.getElementById("intraclassCorrelation").reset();
-        document.getElementById("clusterSize").reset();
-        document.getElementById("allocationRatio").reset();
-        defaultType1P = 0.95;
-        defaultType2P = 0.2;
-        type1ErrorProbability = defaultType1P;
-        type2ErrorProbability = defaultType2P;
-        zAlpha = 1.95996;
-        zBeta = 0.84162;
-        sampleNumber2 = 0;
-        allocationRatio = 1;
-        sampleNumber1 = allocationRatio*sampleNumber2;
-        totalSampleNumber = sampleNumber1+sampleNumber2;
-        clusterSize = 1;
-        intraclassCorrelation = 0;
-        inflationFactor = 1+(clusterSize -1)*intraclassCorrelation;
-        totalSampleNumberCRCT = inflationFactor*totalSampleNumber;
-        document.all("zAlphaHtml").innerHTML = zAlpha;
-        document.all("zBetaHtml").innerHTML = zBeta;
-        document.all("sampleSize2").innerHTML = sampleNumber2;
-        document.all("sampleSize1").innerHTML = sampleNumber1;
-        document.all("intraclassCorrelation").inerHTML = intraclassCorrelation;
-        document.all("inflationFactor").innerHTML = inflationFactor;
-        document.all("totalSampleSize").innerHTML = totalSampleNumber;
-        document.all("totalSampleSizeCRCT").innerHTML = totalSampleNumberCRCT;
+        document.getElementById("formSaltFactor").reset();
+        document.getElementById("formBioFactor").reset();
+        document.getElementById("formDose").reset();
+        document.getElementById("formTau").reset();
+        document.getElementById("formTInfusion").reset();
+        document.getElementById("formClearance").reset();
+        document.getElementById("formVDistribution").reset();
+        document.getElementById("formDoseNumber").reset();
+        saltFactor = 1;
+        bioFactor = 1;
+        dose = 0;
+        tau = 0;
+        tInfusion = 60;
+        infusionRate = 0;
+        clearance = 0;
+        vDistribution = 0;
+        eliminationRateConstant = 0;
+        halfLife = 0;
+        doseNumber = 1;
+        cNMax = 0;
+        cNMin = 0;
+        cSsMax = 0;
+        cSsMin = 0;
+        document.all("cNMaxId").innerHTML = cNMax;
+        document.all("cNMinId").innerHTML = cNMin;
+        document.all("cSsMaxId").innerHTML = cSsMax;
+        document.all("cSsMinId").innerHTML = cSsMin;
+        document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
+        document.all("halfLife").innerHTML = halfLife;
+        document.all("infusionRate").innerHTML = infusionRate;
     }
-/* For proportions */
-    var type1ErrorProbability2 = 0.95;
-    var type2ErrorProbability2 = 0.2;
-    var zAlpha2 = 1.95996;
-    var zBeta2 = 0.84162;
-    var defaultType1PProportion;
-    var defaultType2PProportion;
-    var sampleNumber1Proportion;
-    var sampleNumber2Proportion;
-    var totalSampleNumberProportion;
-    var totalSampleNumberProportionCRCT;
-    var deltaTrueProbability;
-    var proportion1;
-    var proportion2;
-    var allocationRatio2 = 1;
-    var intraclassCorrelation2 = 0;
-    var clusterSize2 = 1;
-    var inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-    document.all("inflationFactor2").innerHTML = inflationFactor2;
-    var pooledProportion;
-    function setValue2() {
-        type1ErrorProbability2 = document.forms.formTypeIError2.typeIErrorChoice2.value;
-        type2ErrorProbability2 = document.forms.formTypeIIError2.typeIIErrorChoice2.value;
-        if(type1ErrorProbability2 == 0.9) {
-            zAlpha2 = 1.64485;
-        }
-        else if(type1ErrorProbability2 == 0.95) {
-            zAlpha2 = 1.95996;
-        }
-        else {
-            zAlpha2 = 2.57583;
-        }
-        document.all("zAlphaHtml2").innerHTML = zAlpha2;
-        if(type2ErrorProbability2 == 0.05) {
-            zBeta2 = 1.64485;
-        }
-        else if(type2ErrorProbability2 == 0.1) {
-            zBeta2 = 1.28155;
-        }
-        else if(type2ErrorProbability2 == 0.2) {
-            zBeta2 = 0.84162;
-        }
-        document.all("zBetaHtml2").innerHTML = zBeta2;
-    }
-    function Calculate2() {
-        proportion1 = Number(document.forms.proportion1.proportion1Input.value);
-        proportion2 = Number(document.forms.proportion2.proportion2Input.value);
-        allocationRatio2 = Number(document.forms.allocationRatio2.allocationRatio2Input.value);
-        intraclassCorrelation2 = Number(document.forms.intraclassCorrelation2.intraclassCorrelation2Input.value);
-        clusterSize2 = Number(document.forms.clusterSize2.clusterSize2Input.value);
-        deltaTrueProbability = proportion1-proportion2;
-        pooledProportion = (proportion1+allocationRatio2*proportion2)/(allocationRatio2+1);
-        sampleNumber2Proportion = Math.pow(zAlpha2*Math.sqrt((allocationRatio2+1)*pooledProportion*(1-pooledProportion))+zBeta2*Math.sqrt(allocationRatio2*proportion1*(1-proportion1)+proportion2*(1-proportion2)),2)/allocationRatio2/Math.pow((proportion1-proportion2),2);
-        sampleNumber1Proportion = allocationRatio2*sampleNumber2Proportion;
-        totalSampleNumberProportion = sampleNumber2Proportion+sampleNumber1Proportion;
-        inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-        totalSampleNumberProportionCRCT = totalSampleNumberProportion*inflationFactor2;
-        document.all("inflationFactor2").innerHTML = inflationFactor2;
-        document.all("pooledProportion").innerHTML = pooledProportion;
-        document.all("sampleSize2Proportion").innerHTML = sampleNumber2Proportion;
-        document.all("sampleSize1Proportion").innerHTML = sampleNumber1Proportion;
-        document.all("totalSampleSizeProportion").innerHTML = totalSampleNumberProportion;
-        document.all("totalSampleSizeProportionCRCT").innerHTML = totalSampleNumberProportionCRCT;
+    function Analyze2() {
+        saltFactor2 = document.forms.formSaltFactor2.saltFactorInput2.value;
+        bioFactor2 = document.forms.formBioFactor2.bioFactorInput2.value;
+        dose2 = document.forms.formDose2.doseInput2.value;
+        tau2 = document.forms.formTau2.tauInput2.value;
+        tInfusion2 = document.forms.formTInfusion2.tInfusionInput2.value;
+        doseNumber2 = document.forms.formDoseNumber2.doseNumberInput2.value;
+        infusionRate2 = dose2/tInfusion2;
+        peakTime = document.forms.formPeakTime.peakTimeInput.value;
+        timeElapsed = document.forms.formTimeElapsed.timeElapsedInput.value;
+        cNT0 = document.forms.formCNT0.cNT0Input.value;
+        cNT = document.forms.formCNT.CNTInput.value;
+        eliminationRateConstant2 = Math.log(cNT/cNT0)/(peakTime-timeElapsed)*60;
+        halfLife2 = Math.log(2)/eliminationRateConstant2;
+        virtualCNMax = cNT0/Math.exp(-eliminationRateConstant2*(peakTime-tInfusion2)/60);
+        clearance2 = saltFactor2*bioFactor2*infusionRate2*1000/virtualCNMax*(1-Math.exp(-eliminationRateConstant2*tInfusion2/60))*(1-Math.exp(-doseNumber2*eliminationRateConstant2*tau2))/(1-Math.exp(-eliminationRateConstant2*tau2));
+        vDistribution2 = clearance2/1000*60/eliminationRateConstant2;
+        document.all("clearance2").innerHTML = clearance2;
+        document.all("vDistribution2").innerHTML = vDistribution2;
+        document.all("infusionRate2").innerHTML = infusionRate2;
+        document.all("virtualCNMax").innerHTML = virtualCNMax;
+        document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
+        document.all("halfLife2").innerHTML = halfLife2;
     }
     function Reset2() {
-        document.getElementById("formTypeIError2").reset();
-        document.getElementById("formTypeIIError2").reset();
-        document.getElementById("proportion1").reset();
-        document.getElementById("proportion2").reset();
-        document.getElementById("intraclassCorrelation2").reset();
-        document.getElementById("clusterSize2").reset();
-        document.getElementById("allocationRatio2").reset();
-        defaultType1PProportion = 0.95;
-        defaultType2PProportion = 0.2;
-        type1ErrorProbability2 = defaultType1PProportion;
-        type2ErrorProbability2 = defaultType2PProportion;
-        zAlpha2 = 1.95996;
-        zBeta2 = 0.84162;
-        sampleNumber2Proportion = 0;
-        allocationRatio2 = 1;
-        sampleNumber1Proportion = 0;
-        totalSampleNumberProportion = sampleNumber1Proportion+sampleNumber2Proportion;
-        clusterSize2 = 1;
-        intraclassCorrelation2 = 0;
-        inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-        totalSampleNumberProportion = 0;
-        totalSampleNumberProportionCRCT = 0;
-        document.all("zAlphaHtml2").innerHTML = zAlpha2;
-        document.all("zBetaHtml2").innerHTML = zBeta2;
-        document.all("sampleSize2Proportion").innerHTML = sampleNumber2Proportion;
-        document.all("sampleSize1Proportion").innerHTML = sampleNumber1Proportion;
-        document.all("intraclassCorrelation2").inerHTML = intraclassCorrelation2;
-        document.all("inflationFactor2").innerHTML = inflationFactor2;
-        document.all("totalSampleSizeProportion").innerHTML = totalSampleNumberProportion;
-        document.all("totalSampleSizeProportionCRCT").innerHTML = totalSampleNumberProportionCRCT;
+        document.getElementById("formSaltFactor2").reset();
+        document.getElementById("formBioFactor2").reset();
+        document.getElementById("formDose2").reset();
+        document.getElementById("formTau2").reset();
+        document.getElementById("formTInfusion2").reset();
+        document.getElementById("formPeakTime").reset();
+        document.getElementById("formTimeElapsed").reset();
+        document.getElementById("formDoseNumber2").reset();
+        document.getElementById("formCNT0").reset();
+        document.getElementById("formCNT").reset();
+        saltFactor2 = 1;
+        bioFactor2 = 1;
+        dose2 = 0;
+        tau2 = 0;
+        tInfusion2 = 60;
+        infusionRate2 = 0;
+        clearance2 = 0;
+        vDistribution2 = 0;
+        eliminationRateConstant2 = 0;
+        halfLife2 = 0;
+        doseNumber2 = 1;
+        peakTime = 0;
+        timeElapsed = 0;
+        cNT0 = 0;
+        cNT = 0;
+        virtualCNMax = 0;
+        document.all("virtualCNMax").innerHTML = virtualCNMax;
+        document.all("clearance2").innerHTML = clearance2;
+        document.all("vDistribution2").innerHTML = vDistribution2;
+        document.all("infusionRate2").innerHTML = infusionRate2;
+        document.all("eliminationRateConstant2").innerHTML = eliminationRateConstant2;
+        document.all("halfLife2").innerHTML = halfLife2;
+    }
+    function Analyze3() {
+        concentration0 = document.forms.formCT0.cT0Input.value;
+        clearance3 = document.forms.formClearance3.clearance3Input.value;
+        vDistribution3 = document.forms.formVDistribution3.vDistribution3Input.value;
+        timeElapsed3A = document.forms.formTimeElapsed3A.timeElapsed3AInput.value;
+        timeElapsed3B = document.forms.formTimeElapsed3B.timeElapsed3BInput.value;
+        timeElapsed3C = document.forms.formTimeElapsed3C.timeElapsed3CInput.value;
+        timeElapsed3D = document.forms.formTimeElapsed3D.timeElapsed3DInput.value;
+        eliminationRateConstant3 = clearance3/1000*60/vDistribution3;
+        halfLife3 = Math.log(2)/eliminationRateConstant3;
+        concentration1 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3A/60);
+        concentration2 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3B/60);
+        concentration3 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3C/60);
+        concentration4 = concentration0*Math.exp(-eliminationRateConstant3*timeElapsed3D/60);
+        document.all("eliminationRateConstant3").innerHTML = eliminationRateConstant3;
+        document.all("halfLife3").innerHTML = halfLife3;
+        document.all("concentration1").innerHTML = concentration1;
+        document.all("concentration2").innerHTML = concentration2;
+        document.all("concentration3").innerHTML = concentration3;
+        document.all("concentration4").innerHTML = concentration4;
+    }
+    function Reset3() {
+        document.getElementById("formCT0").reset();
+        document.getElementById("formClearance3").reset();
+        document.getElementById("formVDistribution3").reset();
+        document.getElementById("formTimeElapsed3A").reset();
+        document.getElementById("formTimeElapsed3B").reset();
+        document.getElementById("formTimeElapsed3C").reset();
+        document.getElementById("formTimeElapsed3D").reset();
+        concentration0 = 0;
+        concentration1 = 0;
+        concentration2 = 0;
+        concentration3 = 0;
+        concentration4 = 0;
+        clearance3 = 0;
+        VDistribution3 = 0;
+        timeElapsed3A = 30;
+        timeElapsed3B = 60;
+        timeElapsed3C = 120;
+        timeElapsed3D = 240;
+        concentration1 = 0;
+        concentration2 = 0;
+        concentration3 = 0;
+        concentration4 = 0;
+        eliminationRateConstant3 = 0;
+        halfLife3 = 0;
+        document.all("eliminationRateConstant3").innerHTML = eliminationRateConstant3;
+        document.all("halfLife3").innerHTML = halfLife3;
+        document.all("concentration1").innerHTML = concentration1;
+        document.all("concentration2").innerHTML = concentration2;
+        document.all("concentration3").innerHTML = concentration3;
+        document.all("concentration4").innerHTML = concentration4;
+    }
+    function Analyze4() {
+        saltFactor4 = document.forms.formSaltFactor4.saltFactor4Input.value;
+        bioFactor4 = document.forms.formBioFactor4.bioFactor4Input.value;
+        dose4 = document.forms.formDose4.dose4Input.value;
+        vDistribution4 = document.forms.formVDistribution4.vDistribution4Input.value;
+        cPresent = document.forms.formCPresent.cPresentInput.value;
+        concentrationByLD = saltFactor4*bioFactor4*dose4/vDistribution4;
+        concentrationAfterLD = Number(cPresent)+concentrationByLD;
+        document.all("concentrationAfterLD").innerHTML = concentrationAfterLD;
+        document.all("concentrationByLD").innerHTML = concentrationByLD;
+    }
+    function Reset4() {
+        document.getElementById("formSaltFactor4").reset();
+        document.getElementById("formBioFactor4").reset();
+        document.getElementById("formDose4").reset();
+        document.getElementById("formVDistribution4").reset();
+        document.getElementById("formCPresent").reset();
+        saltFactor4 = 1;
+        bioFactor4 = 1;
+        dose4 = 0;
+        vDistribution4 = 0;
+        cPresent = 0;
+        concentrationByLD = 0;
+        concentrationAfterLD = 0;
+        document.all("concentrationAfterLD").innerHTML = concentrationAfterLD;
+        document.all("concentrationByLD").innerHTML = concentrationByLD;
     }
 </script>
 </body>
