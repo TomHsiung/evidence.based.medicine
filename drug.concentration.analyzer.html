@@ -21,7 +21,7 @@ border-radius: 5px;
 color: #ffffff;
 }
 body {
-width: 1600px;
+width: 99%;
 font-family: monospace;
 background-image:
 url("Greater_coat_of_arms_of_the_United_States.png"),
@@ -30,9 +30,9 @@ url("Seal_of_the_United_States_Department_of_the_Navy.png"),
 url("United_States_Department_of_Defense_Seal.png"),
 url("Seal_of_an_Embassy_of_the_United_States_of_America.png");
 background-repeat: no-repeat;
-background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 2.5%;
-background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
-background-attachment: fixed, fixed, fixed, fixed, fixed;
+background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 19px;
+background-size: 30%, 7.5%, 7.5%, 7.5%, 135px;
+background-attachment: fixed, fixed, fixed, fixed, scroll;
 }
 p {
 line-height: 1.5em;
@@ -67,6 +67,12 @@ padding: 5px;
 text-align: left;
 border-radius: 5px;
 }
+.row {
+display: flex;
+}
+.column {
+flex: 50%;
+}
 legend {
 margin-left: 15px;
 }
@@ -100,7 +106,8 @@ border-radius: 5px;
     24 Tongjia Alley, China Pharmaceutical University<br />
     Nanjing, Jiangsu, 210009</b></p>
 <hr />
-<div style="float:left; width:50%;">
+<div class="row">
+<div class="column">
 <h3>Drug Concentration Predictor</h3>
 <table>
     <tr>
@@ -205,7 +212,7 @@ border-radius: 5px;
 <input type="button" value="Reset" onclick="Reset();" />
 </form>
 </div>
-<div style="float:left; width:50%;">
+<div class="column">
 <h3>Pharmacokinetic Parameter Esitmator</h3>
 <table>
     <tr>
@@ -319,11 +326,15 @@ border-radius: 5px;
 <input type="button" value="Reset" onclick="Reset2();" />
 </form>
 </div>
-<div style="float:left; width:100%;">
+</div>
+<div class="row">
+<div class="column">
 <br />
 <hr />
 </div>
-<div style="float:left; width:50%;">
+</div>
+<div class="row">
+<div class="column">
 <h3>Loading dose predictor</h3>
 <table>
     <tr>
@@ -404,7 +415,7 @@ border-radius: 5px;
     <li>Rosenbaum, E Sara. (Ed.). (2016). <i>Basic Pharmacokinetics and Pharmacodynamics: An Integrated Textbook and Computer Simulations 2nd Edition</i> (pp. 281-282). Hoboken, NJ: Wiley.</li>
 </ol>
 </div>
-<div style="float:left; width:50%;">
+<div class="column">
 <h3>Drug decay emulator</h3>
 <table>
     <tr>
@@ -508,10 +519,13 @@ border-radius: 5px;
     <li>C<sub>tn</sub> (mcg/mL) is the drug concentration at different time points once the drug administration has finished</li>
 </ul>
 </div>
-<div style="float:left; width:100%;">
+</div>
+<div class="row">
+<div class="column" style="width:100%;">
 <hr />
 <h3>Contact:</h3>
 <p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+</div>
 </div>
 <script>
     var saltFactor;
