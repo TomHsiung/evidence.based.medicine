@@ -21,7 +21,7 @@
         color: #ffffff;
     }
     body {
-        width: 1600px;
+        width: 99%;
         font-family: monospace;
         background-image:
             url("Greater_coat_of_arms_of_the_United_States.png"),
@@ -30,9 +30,9 @@
             url("United_States_Department_of_Defense_Seal.png"),
             url("Seal_of_an_Embassy_of_the_United_States_of_America.png");
             background-repeat: no-repeat;
-            background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 2.5%;
-            background-size: 30%, 7.5%, 7.5%, 7.5%, 7.5%;
-            background-attachment: fixed, fixed, fixed, fixed, fixed;
+            background-position: 50% 50%, 95% 90%, 5% 90%, 5% 10%, 97.5% 19px;
+            background-size: 30%, 7.5%, 7.5%, 7.5%, 135px;
+            background-attachment: fixed, fixed, fixed, fixed, scroll;
     }
     p {
         line-height: 1.5em;
@@ -55,6 +55,12 @@
         text-align: left;
         border-radius: 5px;
     }
+.row {
+display: flex;
+}
+.column {
+flex: 50%;
+}
     legend {
         margin-left: 15px;
     }
@@ -89,7 +95,8 @@
     24 Tongjia Alley, China Pharmaceutical University<br />
     Nanjing, Jiangsu, 210009</b></p>
 <hr />
-<div style="float:left; width:50%;">
+<div class="row">
+<div class="column">
 <h3>Sample size estimator for continuous variables</h3>
 <table>
     <tr>
@@ -196,7 +203,7 @@
     <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp. 180). New York, NY: Springer.</li>
 </ol>
 </div>
-<div style="float:right; width:50%;">
+<div class="column">
 <!-- For proportions -->
 <h3>Sample size estimator for proportions</h3>
 <table>
@@ -301,10 +308,13 @@
     <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp.172). New York, NY: Springer.</li>
 </ol>
 </div>
-<div style="float:right; width:100%;">
+</div>
+<div class="row">
+<div class="column" style="width:100%;">
 <hr />
 <h3>Contact:</h3>
 <p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+</div>
 </div>
 <script>
 /* For continuous variables */
