@@ -21,7 +21,7 @@
         color: #ffffff;
     }
     body {
-        width: 99%;
+        width: 100%;
         font-family: monospace;
         background-image:
             url("Greater_coat_of_arms_of_the_United_States.png"),
@@ -61,6 +61,10 @@ display: flex;
 .column {
 flex: 50%;
 }
+.content {
+max-width: 95%;
+margin: auto;
+}
     legend {
         margin-left: 15px;
     }
@@ -89,6 +93,7 @@ flex: 50%;
 <title>Sample Size Estimator</title>
 </head>
 <body>
+<div class="content">
 <!-- For continuous variables -->
 <h3>Sample Size Estimator</h3>
 <p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
@@ -203,7 +208,7 @@ flex: 50%;
     <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp. 180). New York, NY: Springer.</li>
 </ol>
 </div>
-<div class="column">
+<div class="column" style="margin-left:50px;">
 <!-- For proportions -->
 <h3>Sample size estimator for proportions</h3>
 <table>
@@ -314,6 +319,7 @@ flex: 50%;
 <hr />
 <h3>Contact:</h3>
 <p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+</div>
 </div>
 </div>
 <script>
