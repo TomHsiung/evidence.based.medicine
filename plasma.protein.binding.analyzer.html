@@ -21,7 +21,7 @@ border-radius: 5px;
 color: #ffffff;
 }
 body {
-width: 99%;
+width: 100%;
 font-family: monospace;
 background-image:
 url("Greater_coat_of_arms_of_the_United_States.png"),
@@ -73,6 +73,10 @@ display: flex;
 .column {
 flex: 50%;
 }
+.content {
+max-width: 95%;
+margin: auto;
+}
 legend {
 margin-left: 15px;
 }
@@ -101,6 +105,7 @@ border-radius: 5px;
 <title>Plasma Protein Binding Analyzer</title>
 </head>
 <body>
+<div class="content">
 <h3>Plasma Protein Binding Analyzer</h3>
 <p><b>Tom Hsiung, M.S. Pharm, Clinical Pharmacy Specialist<br />
     24 Tongjia Alley, China Pharmaceutical University<br />
@@ -205,7 +210,7 @@ border-radius: 5px;
     <li>C<sub>u</sub> is the plasma unbound drug concentration (mcg/mL)</li>
 </ul>
 </div>
-<div class="column">
+<div class="column" style="margin-left:50px;">
 <h3>Protein Displacing Analyzer</h3>
 <table>
     <tr>
@@ -359,6 +364,7 @@ border-radius: 5px;
 <hr />
 <h3>Contact:</h3>
 <p>For more information please visit <a href="http://blog.toms-therapeutics.site">blog.toms-therapeutics.site</a></p>
+</div>
 </div>
 </div>
 <script>
