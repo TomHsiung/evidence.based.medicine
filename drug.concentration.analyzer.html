@@ -191,7 +191,7 @@ border-radius: 5px;
         </form></abbr></td>
     </tr>
 </table>
-<fieldset class="one" style="width:720px"><legend>Predicted drug concentration:</legend>
+<fieldset class="one" style="width:740px"><legend>Predicted drug concentration:</legend>
 <table>
     <tr>
     <td align="right" width="100">C<sub>n,max</sub>:</td>
@@ -208,6 +208,14 @@ border-radius: 5px;
     <td align="right" width="200">C<sub>ss,min</sub>:</td>
     <td align="left" width="20" id="cSsMinId">0</td>
     <td align="left">mcg/mL</td>
+    </tr>
+    <tr>
+    <td align="right">AUC<sub>ss,tau</sub>:</td>
+    <td align="left" width="20" id="aucSsTauId">0</td>
+    <td align="left">mg・hr/L</td>
+    <td align="right">AUC<sub>ss,24</sub>:</td>
+    <td align="left" width="20" id="aucSs24Id">0</td>
+    <td align="left">mg・hr/L</td>
     </tr>
 </table>
 </fieldset>
@@ -549,6 +557,8 @@ border-radius: 5px;
     var cNMin;
     var cSsMax;
     var cSsMin;
+    var aucSsTau;
+    var aucSs24;
     var saltFactor2;
     var bioFactor2;
     var dose2;
@@ -601,6 +611,8 @@ border-radius: 5px;
         cNMin = cNMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
         cSsMax = saltFactor*bioFactor*infusionRate*1000/clearance*(1-Math.exp(-eliminationRateConstant*tInfusion/60))*(1-0)/(1-Math.exp(-eliminationRateConstant*tau));
         cSsMin = cSsMax*Math.exp(-eliminationRateConstant*(tau-tInfusion/60));
+        aucSsTau = dose/clearance*1000/60;
+        aucSs24 = aucSsTau*24/tau;
         document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
         document.all("halfLife").innerHTML = halfLife;
         document.all("infusionRate").innerHTML = infusionRate;
@@ -608,6 +620,8 @@ border-radius: 5px;
         document.all("cNMinId").innerHTML = cNMin;
         document.all("cSsMaxId").innerHTML = cSsMax;
         document.all("cSsMinId").innerHTML = cSsMin;
+        document.all("aucSsTauId").innerHTML = aucSsTau;
+        document.all("aucSs24Id").innerHTML = aucSs24;
     }
     function Reset() {
         document.getElementById("formSaltFactor").reset();
@@ -633,10 +647,14 @@ border-radius: 5px;
         cNMin = 0;
         cSsMax = 0;
         cSsMin = 0;
+        aucSsTau = 0;
+        aucSs24 = 0;
         document.all("cNMaxId").innerHTML = cNMax;
         document.all("cNMinId").innerHTML = cNMin;
         document.all("cSsMaxId").innerHTML = cSsMax;
         document.all("cSsMinId").innerHTML = cSsMin;
+        document.all("aucSsTauId").innerHTML = aucSsTau;
+        document.all("aucSs24Id").innerHTML = aucSs24;
         document.all("eliminationRateConstant").innerHTML = eliminationRateConstant;
         document.all("halfLife").innerHTML = halfLife;
         document.all("infusionRate").innerHTML = infusionRate;
