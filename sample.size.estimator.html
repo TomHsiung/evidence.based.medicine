@@ -55,6 +55,12 @@
         text-align: left;
         border-radius: 5px;
     }
+    fieldset.three {
+    border: 2px solid #ffc133;
+    padding: 5px;
+    text-align: left;
+    border-radius: 5px;
+    }
 .row {
 display: flex;
 }
@@ -87,6 +93,16 @@ margin: auto;
         border: 2px solid #ed6c60;
         padding: 2px;
         border-radius: 5px;
+    }
+    #intraclassCorrelationShadow3 {
+    border: 2px solid #ffc133;
+    padding: 2px;
+    border-radius: 5px;
+    }
+    #clusterSizeShadow3 {
+    border: 2px solid #ffc133;
+    padding: 2px;
+    border-radius: 5px;
     }
 </style>
 <meta charset="UTF-8">
@@ -317,6 +333,103 @@ margin: auto;
     <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp.172). New York, NY: Springer.</li>
 </ol>
 </div>
+<div class="column" style="margin-left:50px;">
+<!-- For hazard rate -->
+<h3>Sample size estimator for hazard rates</h3>
+<table>
+    <tr>
+    <td align="right">Significance level (I error):</td>
+    <td align="right" width="160" height="50">
+        <form align="left" id="formTypeIError3" onclick="setValue3();">
+        <input type="radio" name="typeIErrorChoice3" value=0.9 />90%
+        <input type="radio" name="typeIErrorChoice3" value=0.95 checked="checked" />95%
+        <input type="radio" name="typeIErrorChoice3" value=0.99 />99%
+        </form></td>
+    <td align="right">Z<sub>alpha</sub>:</td>
+    <td align="left" id="zAlphaHtml3">1.95996</td>
+    </tr>
+    <tr>
+    <td align="right">Type II error probability:</td>
+    <td>
+        <form align="left" id="formTypeIIError3" onclick="setValue3();">
+        <input type="radio" name="typeIIErrorChoice3" value=0.05 />5%&nbsp;
+        <input type="radio" name="typeIIErrorChoice3" value=0.1 />10%
+        <input type="radio" name="typeIIErrorChoice3" value=0.2 checked="checked" />20%
+        </form></td>
+    <td align="right">Z<sub>beta</sub>:</td>
+    <td align="left" id="zBetaHtml3">0.84162</td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right">Hazard ratio:</td>
+    <td align="right" height="30">
+        <abbr title="Fill in the expected value of hazard ratio"><form align="left" id="hazardRatio3">
+        <input size="10" type="text" name="hazardRatio3Input" />
+        </form></abbr></td>
+    <td align="right" width="300">Allocation ratio of events:</td>
+    <td>
+        <abbr title="Fill in a value larger than 0"><form align="left" id="allocationRatioEvent3">
+            <input size="5" type="text" name="allocationRatioEvent3Input" value=0.5 /></form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right"><del>Intraclass correlation</del>:</td>
+    <td>
+        <abbr title="Fill in a value between 0 and 1"><form align="left" id="intraclassCorrelation3">
+        <input size="5" type="text" name="intraclassCorrelation3Input" value=0 /></form></abbr></td>
+    <td align="right" width="120"><del>Cluster size</del>:</td>
+    <td>
+        <abbr title="Fill in a value equal or larger than 1"><form align="left" id="clusterSize3">
+        <input size="5" type="text" name="clusterSize3Input" value=1 /></form></abbr></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td align="right" height="30"><del>Inflation factor</del>:</td>
+    <td align="left" id="inflationFactor3"></td>
+    </tr>
+</table>
+<br />
+<br />
+<fieldset class="three" style="width:645px"><legend>Results:</legend>
+<table>
+    <tr>
+    <td align="right">Events req. 1:</td>
+    <td align="left" width="150" id="eventNumber1Hazard">0</td>
+    <td align="right">Events req. 2:</td>
+    <td align="left" width="150" id="eventNumber2Hazard">0</td>
+    </tr>
+    <tr>
+    <td align="right" height="30">Total events required:</td>
+    <td align="left" id="totalEventNumberHazard">0</td>
+    </tr>
+    <tr>
+        <td align="right"><del>Total sample size for CRCT</del>:</td>
+    <td align="left" id="totalEventNumberHazardCRCT">0</td>
+    </tr>
+</table>
+</fieldset>
+<br />
+<form>
+<input type="button" value="Calculate" onclick="Calculate3();" />
+<input type="button" value="Reset" onclick="Reset3();" />
+</form>
+<h3>Notice:</h3>
+<ul>
+    <li>Significance level is inversely associated with type I error probability</li>
+    <li>Type II error probability is inversely associated with power</li>
+    <li>Hazard ratio is the ratio of (two) compared harzard rates</li>
+    <li><div style="display:inline" id="intraclassCorrelationShadow3"><b>Intraclass correlation</b></div> measures the internal correlation <br />within a cluster, which ranges from 0 to 1 (cluster randomization only)</li>
+    <li><div style="display:inline" id="clusterSizeShadow3"><b>Cluster size</b></div> is the number of observation within a cluster, which is <br />equal or larger than  1 (cluster randomization only)</li>
+    </ul>
+<h3>References:</h3>
+<ol>
+    <li>Piantadosi, S. (Ed.). (2005). <i>Clinical trials: a methodologic perspective 2nd edition</i> (pp. 285). New Jersey, NJ: Wiley.</li>
+    <li>Friedman, L.M., Furberg, C.D., DeMets, D.L., Reboussin, D.M., Granger, C.B. (Eds.). (2015). <i>Fundamentals of clinical trials 5th edition</i> (pp.185). New York, NY: Springer.</li>
+</ol>
+</div>
 </div>
 <div class="row">
 <div class="column" style="width:100%;">
@@ -507,7 +620,6 @@ margin: auto;
         clusterSize2 = 1;
         intraclassCorrelation2 = 0;
         inflationFactor2 = 1+(clusterSize2-1)*intraclassCorrelation2;
-        totalSampleNumberProportion = 0;
         totalSampleNumberProportionCRCT = 0;
         document.all("zAlphaHtml2").innerHTML = zAlpha2;
         document.all("zBetaHtml2").innerHTML = zBeta2;
@@ -517,6 +629,89 @@ margin: auto;
         document.all("inflationFactor2").innerHTML = inflationFactor2;
         document.all("totalSampleSizeProportion").innerHTML = totalSampleNumberProportion;
         document.all("totalSampleSizeProportionCRCT").innerHTML = totalSampleNumberProportionCRCT;
+    }
+/* For hazard rates */
+    var type1ErrorProbability3 = 0.95;
+    var type2ErrorProbability3 = 0.2;
+    var zAlpha3 = 1.95996;
+    var zBeta3 = 0.84162;
+    var defaultType1PHazard;
+    var defaultType2PHazard;
+    var eventNumber1Hazard;
+    var eventNumber2Hazard;
+    var totalEventNumberHazard;
+    var totalEventNumberHazardCRCT;
+    var hazardRatio;
+    var allocationRatioEvent = 0.5;
+    var intraclassCorrelation3 = 0;
+    var clusterSize3 = 1;
+    var inflationFactor3 = 1+(clusterSize3-1)*intraclassCorrelation3;
+    document.all("inflationFactor3").innerHTML = inflationFactor3;
+    function setValue3() {
+        type1ErrorProbability3 = document.forms.formTypeIError3.typeIErrorChoice3.value;
+        type2ErrorProbability3 = document.forms.formTypeIIError3.typeIIErrorChoice3.value;
+        if(type1ErrorProbability3 == 0.9) {
+            zAlpha3 = 1.64485;
+        }
+        else if(type1ErrorProbability3 == 0.95) {
+            zAlpha3 = 1.95996;
+        }
+        else {
+            zAlpha3 = 2.57583;
+        }
+        document.all("zAlphaHtml3").innerHTML = zAlpha3;
+        if(type2ErrorProbability3 == 0.05) {
+            zBeta3 = 1.64485;
+        }
+        else if(type2ErrorProbability3 == 0.1) {
+            zBeta3 = 1.28155;
+        }
+        else if(type2ErrorProbability3 == 0.2) {
+            zBeta3 = 0.84162;
+        }
+        document.all("zBetaHtml3").innerHTML = zBeta3;
+    }
+    function Calculate3() {
+        hazardRatio = Number(document.forms.hazardRatio3.hazardRatio3Input.value);
+        allocationRatioEvent = Number(document.forms.allocationRatioEvent3.allocationRatioEvent3Input.value);
+        intraclassCorrelation3 = Number(document.forms.intraclassCorrelation3.intraclassCorrelation3Input.value);
+        clusterSize3 = Number(document.forms.clusterSize3.clusterSize3Input.value);
+        eventNumber2Hazard = (1/allocationRatioEvent+1)*Math.pow(zAlpha3+zBeta3,2)/Math.pow(Math.log(hazardRatio),2);
+        eventNumber1Hazard = eventNumber2Hazard*allocationRatioEvent;
+        totalEventNumberHazard = eventNumber1Hazard+eventNumber2Hazard;
+        inflationFactor3 = 1+(clusterSize3-1)*intraclassCorrelation3;
+        document.all("inflationFactor3").innerHTML = inflationFactor3;
+        document.all("eventNumber2Hazard").innerHTML = eventNumber2Hazard;
+        document.all("eventNumber1Hazard").innerHTML = eventNumber1Hazard;
+        document.all("totalEventNumberHazard").innerHTML = totalEventNumberHazard;
+    }
+    function Reset3() {
+    document.getElementById("formTypeIError3").reset();
+    document.getElementById("formTypeIIError3").reset();
+    document.getElementById("hazardRatio3").reset();
+    document.getElementById("intraclassCorrelation3").reset();
+    document.getElementById("clusterSize3").reset();
+    document.getElementById("allocationRatioEvent3").reset();
+    defaultType1PHazard = 0.95;
+    defaultType2PHazard = 0.2;
+    type1ErrorProbability3 = defaultType1PHazard;
+    type2ErrorProbability3 = defaultType2PHazard;
+    zAlpha3 = 1.95996;
+    zBeta3 = 0.84162;
+    eventNumber1Hazard = 0;
+    eventNumber2Hazard = 0;
+    allocationRatio3 = 0.5;
+    totalEventNumberHazard = eventNumber1Hazard+eventNumber2Hazard;
+    clusterSize3 = 1;
+    intraclassCorrelation3 = 0;
+    inflationFactor3 = 1+(clusterSize3-1)*intraclassCorrelation3;
+    document.all("zAlphaHtml3").innerHTML = zAlpha3;
+    document.all("zBetaHtml3").innerHTML = zBeta3;
+    document.all("eventNumber1Hazard").innerHTML = eventNumber1Hazard;
+    document.all("eventNumber2Hazard").innerHTML = eventNumber2Hazard;
+    document.all("intraclassCorrelation3").inerHTML = intraclassCorrelation3;
+    document.all("inflationFactor3").innerHTML = inflationFactor3;
+    document.all("totalEventNumberHazard").innerHTML = totalEventNumberHazard;
     }
 </script>
 </body>
